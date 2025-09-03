@@ -23,7 +23,6 @@ contract TestToken is ERC20, Ownable {
     function mint(address to, uint256 amount) external onlyOwner {
         _mint(to, amount);
     }
-    
     /**
      * @dev Burn tokens (for testing purposes)
      * @param amount Amount of tokens to burn
@@ -31,7 +30,7 @@ contract TestToken is ERC20, Ownable {
     function burn(uint256 amount) external {
         _burn(msg.sender, amount);
     }
-    
+
     /**
      * @dev Get decimals (18 decimals)
      */
