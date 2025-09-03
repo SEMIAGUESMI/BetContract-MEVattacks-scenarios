@@ -24,7 +24,6 @@ contract AMM is IRateContract, ReentrancyGuard {
     
     // Events
     event LiquidityAdded(address indexed provider, uint256 amountA, uint256 amountB, uint256 liquidity);
-    event LiquidityRemoved(address indexed provider, uint256 amountA, uint256 amountB, uint256 liquidity);
     event Swap(address indexed user, uint256 amountIn, uint256 amountOut, bool aToB);
     event RateUpdated(uint256 newRate);
     
@@ -130,7 +129,6 @@ contract AMM is IRateContract, ReentrancyGuard {
         
         require(IERC20(tokenB).transfer(msg.sender, amountB), "Token transfer failed");
         
-        emit LiquidityRemoved(msg.sender, amountA, amountB, liquidity);
         emit RateUpdated(getRate(tokenA, tokenB));
     }
     
