@@ -106,33 +106,6 @@ contract AMM is IRateContract, ReentrancyGuard {
     }
     
     /**
-     * @dev Remove liquidity
-     * @param liquidity Amount of liquidity tokens to burn
-     */
-    function removeLiquidity(uint256 liquidity) external nonReentrant {
-        require(liquidity > 0, "Liquidity must be greater than 0");
-        require(liquidityBalances[msg.sender] >= liquidity, "Insufficient liquidity balance");
-        
-        // Calculate amounts to return
-        uint256 amountA = (liquidity * reserveA) / totalLiquidity;
-        uint256 amountB = (liquidity * reserveB) / totalLiquidity;
-        
-        // Update state
-        liquidityBalances[msg.sender] -= liquidity;
-        totalLiquidity -= liquidity;
-        reserveA -= amountA;
-        reserveB -= amountB;
-        
-        // Transfer assets back to user
-        (bool success, ) = msg.sender.call{value: amountA}("");
-        require(success, "ETH transfer failed");
-        
-        require(IERC20(tokenB).transfer(msg.sender, amountB), "Token transfer failed");
-        
-        emit RateUpdated(getRate(tokenA, tokenB));
-    }
-    
-    /**
      * @dev Swap ETH for tokens
      * @param minTokensOut Minimum tokens to receive (slippage protection)
      */

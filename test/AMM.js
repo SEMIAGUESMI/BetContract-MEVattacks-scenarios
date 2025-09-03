@@ -37,8 +37,6 @@ describe("AMM Contract", async function(){
   })
   describe("test addInitialLiquidity", async function(){
     it("should allow adding liquidity ", async function (){
-
-
     const tokenAmount = ethers.parseUnits("100");
     const etherAmount = ethers.parseUnits("100");
 
@@ -57,7 +55,66 @@ describe("AMM Contract", async function(){
     expect(await amm.reserveB()).to.equal(tokenAmount)
 
   })
-
     })
-  
+    describe("test add liquidity ", async function(){
+        beforeEach(async function () {
+      // Add initial liquidity
+      const tokenAmount = ethers.parseEther("1000");
+      const ethAmount = ethers.parseEther("1");
+      
+      await testToken.connect(liquidityProvider).approve(await amm.getAddress(), tokenAmount);
+      await amm.connect(liquidityProvider).addInitialLiquidity(tokenAmount, { value: ethAmount });
+    });
+
+        it("should allow adding liquidity", async function(){
+            const additionalEth = ethers.parseEther("0.5");
+            const expectedTokens = ethers.parseEther("500");
+            await testToken.connect(liquidityProvider).approve(await amm.getAddress(), expectedTokens);
+            await expect(await amm.connect(liquidityProvider).addLiquidity(expectedTokens, {value:additionalEth})).to.emit(amm, "LiquidityAdded");
+
+        })
+    })
+     describe("Swap Operations", function () {
+    beforeEach(async function () {
+      // Add initial liquidity: 1 ETH : 1000 TEST
+      const tokenAmount = ethers.parseEther("1000");
+      const ethAmount = ethers.parseEther("1");
+      
+      await testToken.connect(liquidityProvider).approve(await amm.getAddress(), tokenAmount);
+      await amm.connect(liquidityProvider).addInitialLiquidity(tokenAmount, { value: ethAmount });
+    });
+
+    it("Should swap ETH for tokens", async function () {
+      const ethIn = ethers.parseEther("0.1");
+      const minTokensOut = ethers.parseEther("80"); // Account for slippage and fees
+      
+      const initialTokenBalance = await testToken.balanceOf(user1.address);
+      
+      await expect(
+        amm.connect(user1).swapETHForTokens(minTokensOut, { value: ethIn })
+      ).to.emit(amm, "Swap")
+        .to.emit(amm, "RateUpdated");
+      
+      const finalTokenBalance = await testToken.balanceOf(user1.address);
+      expect(finalTokenBalance - initialTokenBalance).to.be.greaterThan(minTokensOut);
+    });
+
+    it("Should swap tokens for ETH", async function () {
+      const tokensIn = ethers.parseEther("100");
+      const minEthOut = ethers.parseEther("0.08"); // Account for slippage and fees
+      
+      await testToken.connect(user1).approve(await amm.getAddress(), tokensIn);
+      
+      const initialEthBalance = await ethers.provider.getBalance(user1.address);
+      
+      const tx = await amm.connect(user1).swapTokensForETH(tokensIn, minEthOut);
+      const receipt = await tx.wait();
+      const gasCost = receipt.gasUsed * receipt.gasPrice;
+      
+      const finalEthBalance = await ethers.provider.getBalance(user1.address);
+      
+      // Should receive ETH minus gas costs
+      expect(finalEthBalance + gasCost - initialEthBalance).to.be.greaterThan(minEthOut);
+    });
+   });
 })
