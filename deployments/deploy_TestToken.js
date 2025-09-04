@@ -11,15 +11,16 @@ async function main() {
 
     // deploy the contract
     const TestToken = await ethers.getContractFactory("TestToken");
-    const testToken = await TestToken.deploy()
-    await testToken.waitForDeployment();
-    await testToken.deployTransaction.wait();
-    const deploymentTx = await testToken.deploymentTransaction();
+    const deployTx = await TestToken.deploy()
+    const testToken = await deployTx.waitForDeployment();
 
-    console.log("\n TestToken deployed successfully!");
-    console.log("Transaction hash:", deploymentTx.hash);
-    console.log("Block number:", deploymentTx.blockNumber);
-    console.log("Contract address:", testToken.address);
+    const transaction = await deployTx.deploymentTransaction().wait()
+    
+    console.log("\n TestToken contract deployed successfully!");
+
+    console.log("Transaction Object : ", transaction);
+    console.log("Transaction hash: ", transaction.hash);
+    console.log("Contract address: ", await testToken.getAddress());
 
     const  name = await testToken.name();
     const symbol = await testToken.symbol();
@@ -28,12 +29,12 @@ async function main() {
     const owner = await testToken.owner();
     const deployerBalance = await testToken.balanceOf(deployer.address);
     
-    console.log("Token name:", name);
-    console.log("Token symbol:", symbol);
-    console.log("Decimals:", decimals.toString());
-    console.log("Total supply:", ethers.utils.formatEther(totalSupply), symbol);
-    console.log("Contract owner:", owner);
-    console.log("Deployer balance:", ethers.utils.formatEther(deployerBalance), symbol);
+    console.log("Token name: ", name);
+    console.log("Token symbol: ", symbol);
+    console.log("Decimals: ", decimals.toString());
+    console.log("Total supply: ", ethers.utils.formatEther(totalSupply), symbol);
+    console.log("Contract owner: ", owner);
+    console.log("Deployer balance: ", ethers.utils.formatEther(deployerBalance), symbol);
   
   }
 main()
