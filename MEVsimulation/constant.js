@@ -1,6 +1,6 @@
 
 // TestToken
-const TestToken_Json = require("../artifacts/contracts/AMM.sol/AMM.json");
+const TestToken_Json = require("../artifacts/contracts/TestToken.sol/TestToken.json");
 const TestToken_Address = "0xe843bC5f5034F1FF926109e4F604aa6Ab976f9f2";
 const TestToken_Abi = TestToken_Json.abi;
 
