@@ -1,35 +1,26 @@
-//********* MEV Attack on AMM-based Bet Contract -- MEV ATTACK SIMULATION (AMM)  */
-const { ethers } = require("ethers");
+const { ethers } = require('ethers');
 
-const { 
-       BetContract_Address,
-       TestToken_Address,
-       AMM_Address,
-       BetContract_Abi,
-       TestToken_Abi,
-       AMM_Abi } = require('../constant');
+const {
+ BetContract_Address,
+ TestToken_Address,
+ AMM_Address,
+ BetContract_Abi,
+ TestToken_Abi,
+ AMM_Abi 
+} = require('../constant');
 
-       const getEthereumContract = (address, abi, signer) => {
-       const TransactionContract = new ethers.Contract(address, abi, signer);
-       return TransactionContract
-      }
+// Provider
+const alchemyProvider = new ethers.JsonRpcProvider(process.env.API_URL);
 
-    const alchemy = new ethers.AlchemyProvider("sepolia", { alchemy:process.env.API_KEY});
+// Signer
+const signer = new ethers.Wallet(process.env.Player_PRIVATE_KEY, alchemyProvider);
 
-    const player = new ethers.Wallet(process.env.Player_PRIVATE_KEY, alchemy);
-    const connectedWallet = player.connect(alchemy);
-    const TestToken = getEthereumContract(TestToken_Address, TestToken_Abi, connectedWallet);
-    const AMM = getEthereumContract(AMM_Address, AMM_Abi, connectedWallet);
-    const BetContract = getEthereumContract(BetContract_Address, BetContract_Abi, connectedWallet);
-    (async()=> {
-        
-console.log(process.env.API_KEY)
+// Contracts 
+const AMM = new ethers.Contract(AMM_Address, AMM_Abi, signer);
+const BetContract = new ethers.Contract(BetContract_Address, BetContract_Abi, signer);
+const TestToken = new ethers.Contract(TestToken_Address, TestToken_Abi,signer);
 
-        
-    })();
 module.exports = {
-    alchemy,
-    player,
     TestToken,
     AMM,
     BetContract,
@@ -39,5 +30,7 @@ module.exports = {
     AMM_Address,
     BetContract_Abi,
     TestToken_Abi,
-    AMM_Abi
+    AMM_Abi,
+    signer,
+    alchemyProvider,
 }

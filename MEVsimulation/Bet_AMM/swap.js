@@ -11,7 +11,7 @@ const {
     BetContract_Abi,
     TestToken_Abi,
     AMM_Abi
-} = require ("./beforeEach2.js");
+} = require ("./beforeEach.js");
 (async () => {
              try {
                     console.log("AMM Contract:", AMM.target); // .target instead of address in ethers v6
