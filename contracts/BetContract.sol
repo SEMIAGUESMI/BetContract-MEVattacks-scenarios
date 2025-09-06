@@ -6,7 +6,7 @@ import "./interfaces/IRateContract.sol";
 /**
  * @title BetContract
  * @dev Smart contract for betting on token exchange rates
- * Implementation based on MEV Noninterference paper
+ * Implementation
  */
 contract BetContract {
     // State variables

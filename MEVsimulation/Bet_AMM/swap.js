@@ -5,13 +5,9 @@ const {ethers} = require ("hardhat");
 const {
     TestToken,
     BetContract,
-    BetContract_Address,
     AMM,
-    TestToken_Address,
     AMM_Address,
-    BetContract_Abi,
-    TestToken_Abi,
-    AMM_Abi, alchemyProvider
+     alchemyProvider
 } = require ("./beforeEach.js");
 (async () => {
      try {
@@ -31,10 +27,7 @@ const {
         console.log("amm Balance token after swap = ", ethers.formatUnits(await TestToken.balanceOf(AMM_Address)) )
         console.log("amm balance ether after swap = ", ethers.formatUnits(await alchemyProvider.getBalance(AMM_Address)) )  
         
-  
-
-
-                } catch (error) {
-                    console.error("Error fetching AMM rate:", error);
-                }
+        } catch (error) {
+          console.error("Error fetching AMM rate:", error);
+        }
 })();
