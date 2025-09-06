@@ -114,4 +114,166 @@ contract MEVProtectedBetContract is ChainlinkClient, ConfirmedOwner {
         
         emit ContractInitialized(owner(), initialPot, _betRate, _deadline);
     }
-} 
+   
+    function placeBet() external payable beforeDeadline noBetActive {
+        require(msg.value == betWallet, "Bet amount must equal current bet wallet");
+        require(msg.sender != owner(), "Owner cannot place bets");
+        
+        currentPlayer = msg.sender;
+        playerBet = msg.value;
+        playerBetBlock = block.number;
+        betWallet += msg.value; // Double the pot
+        
+        emit BetPlaced(msg.sender, msg.value, block.number);
+    }
+    
+    /**
+     * @dev Claim win - player wins if current rate exceeds bet rate and no MEV detected
+     * This function initiates the MEV check via Chainlink oracle
+     */
+    function claimWin() external beforeDeadline onlyCurrentPlayer {
+        uint256 currentRate = IRateContract(rateContract).getRate(address(0), token);
+        
+        if (currentRate > betRate) {
+            // Check for MEV transactions via oracle before paying out
+            _requestTransactionCheck(currentPlayer, betWallet);
+        } else {
+            // Player loses, reset state
+            currentPlayer = address(0);
+            playerBet = 0;
+            playerBetBlock = 0;
+        }
+    }
+    
+    /**
+     * @dev Request transaction check from Chainlink oracle
+     * @param player The player address to check
+     * @param winAmount The amount the player would win if no MEV is detected
+     */
+    function _requestTransactionCheck(address player, uint256 winAmount) private {
+        Chainlink.Request memory request = buildChainlinkRequest(
+            jobId,
+            address(this),
+            this.fulfillTransactionCheck.selector
+        );
+        
+        // Set request parameters for the off-chain data provider
+        request.add("fromBlock", uintToString(playerBetBlock));
+        request.add("toBlock", "latest");
+        request.add("fromAddress", addressToString(player));
+        request.add("toAddress", addressToString(rateContract));
+        request.add("url", apiUrl);
+        
+        bytes32 requestId = sendChainlinkRequest(request, fee);
+        
+        // Store request mapping
+        requestToPlayer[requestId] = player;
+        requestToWinAmount[requestId] = winAmount;
+        
+        emit OracleRequestSent(requestId, player);
+    }
+    
+    /**
+     * @dev Chainlink oracle callback function
+     * @param requestId The request ID
+     * @param hasMEVTransactions Boolean indicating if MEV transactions were found
+     */
+    function fulfillTransactionCheck(
+        bytes32 requestId,
+        bool hasMEVTransactions
+    ) public recordChainlinkFulfillment(requestId) {
+        address player = requestToPlayer[requestId];
+        uint256 winAmount = requestToWinAmount[requestId];
+        
+        emit TransactionCheckCompleted(requestId, hasMEVTransactions);
+        
+        if (hasMEVTransactions) {
+            // MEV detected - abort the bet
+            emit BetAborted(player, "MEV transactions detected");
+            _resetBetState();
+        } else {
+            // No MEV detected - pay the player
+            _payoutWinner(player, winAmount);
+        }
+        
+        // Clean up request mappings
+        delete requestToPlayer[requestId];
+        delete requestToWinAmount[requestId];
+    }
+    
+    /**
+     * @dev Pay out the winner
+     * @param player The winning player
+     * @param amount The amount to pay
+     */
+    function _payoutWinner(address player, uint256 amount) private {
+        betWallet = 0;
+        _resetBetState();
+        
+        (bool success, ) = player.call{value: amount}("");
+        require(success, "Transfer failed");
+        
+        emit BetWon(player, amount);
+    }
+    
+    /**
+     * @dev Reset bet state
+     */
+    function _resetBetState() private {
+        currentPlayer = address(0);
+        playerBet = 0;
+        playerBetBlock = 0;
+    }
+    
+    /**
+     * @dev Close bet after deadline - owner can claim remaining funds
+     */
+    function closeBet() external afterDeadline onlyOwner {
+        uint256 amount = betWallet;
+        betWallet = 0;
+        _resetBetState();
+        
+        (bool success, ) = owner().call{value: amount}("");
+        require(success, "Transfer failed");
+        
+        emit BetClosed(owner(), amount);
+    }
+    /**
+     * @dev Utility function to convert uint to string
+     */
+    function uintToString(uint256 value) private pure returns (string memory) {
+        if (value == 0) {
+            return "0";
+        }
+        uint256 temp = value;
+        uint256 digits;
+        while (temp != 0) {
+            digits++;
+            temp /= 10;
+        }
+        bytes memory buffer = new bytes(digits);
+        while (value != 0) {
+            digits -= 1;
+            buffer[digits] = bytes1(uint8(48 + uint256(value % 10)));
+            value /= 10;
+        }
+        return string(buffer);
+    }
+    
+    /**
+     * @dev Utility function to convert address to string
+     */
+    function addressToString(address addr) private pure returns (string memory) {
+        bytes32 value = bytes32(uint256(uint160(addr)));
+        bytes memory alphabet = "0123456789abcdef";
+        bytes memory str = new bytes(42);
+        str[0] = '0';
+        str[1] = 'x';
+        for (uint256 i = 0; i < 20; i++) {
+            str[2 + i * 2] = alphabet[uint8(value[i + 12] >> 4)];
+            str[3 + i * 2] = alphabet[uint8(value[i + 12] & 0x0f)];
+        }
+        return string(str);
+    }
+}
+ 
