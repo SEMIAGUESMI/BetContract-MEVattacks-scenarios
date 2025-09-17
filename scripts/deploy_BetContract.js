@@ -38,6 +38,8 @@ async function main() {
     const bet = await deployTx.waitForDeployment();
     const transaction = await deployTx.deploymentTransaction().wait();
      console.log(transaction)
+     
+     // show gas consumption and transaction fee
      await transaction_receipt(transaction.hash, estimatedGas )   
 }
 main ()
