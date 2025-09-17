@@ -6,7 +6,7 @@ async  function main (){
     // constructor parameters
     const TestToken_address="0xe843bC5f5034F1FF926109e4F604aa6Ab976f9f2";
     const AMM = await ethers.getContractFactory("AMM");
-    const deployTx = await AMM.deploy(TestToken_address);
+   const deployTx = await AMM.deploy(TestToken_address);
     const amm = await deployTx.waitForDeployment();
 
     const transaction = await deployTx.deploymentTransaction().wait();
