@@ -16,8 +16,8 @@ async function getETHPriceUSD() {
 async function main() {
       // constructor parameters
       const TestToken_address="0xe843bC5f5034F1FF926109e4F604aa6Ab976f9f2";
-      const rate_contract_address="0xA464A947813975627A02b43Ced597A18C5497776";
-      const bet_rate = 11000;  // exchange rate ETH/TEST; 1 ETH = 11000 TEST
+      const rate_contract_address="0x8b0068cae3b550f49415e7d8a516cef45e9951c4";
+      const bet_rate = ethers.parseEther("11000");  // exchange rate ETH/TEST; 1 ETH = 11000 TEST
       const initial_pot = ethers.parseEther("0.00000001");    // 0.00000001 ETH initial pot
       const deadline = Math.floor(Date.now() / 1000) + (7 * 24 * 60 * 60); // 7 days
 
@@ -34,13 +34,14 @@ async function main() {
        const estimatedGas = await alchemyProvider.estimateGas(deployTransaction);
 
     //Deploy contract
-    const deployTx = await Bet.deploy(bet_rate, TestToken_address, rate_contract_address, deadline);
+    const deployTx = await Bet.deploy(bet_rate, TestToken_address, rate_contract_address, deadline, { value: initial_pot });
     const bet = await deployTx.waitForDeployment();
     const transaction = await deployTx.deploymentTransaction().wait();
-     console.log(transaction)
-     
+
      // show gas consumption and transaction fee
-     await transaction_receipt(transaction.hash, estimatedGas )   
+     await transaction_receipt(transaction.hash, "deploy", null ) 
+     
+     console.log(transaction)
 }
 main ()
 .then(() => {
