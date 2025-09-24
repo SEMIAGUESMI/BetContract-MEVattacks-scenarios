@@ -14,7 +14,7 @@ const AMM_Address = "0x7B3FA1B861a5D1826CD50347E768B6a5950493a2";
 const AMM_Abi = AMM_Json.abi;
 //BetContract with AMM
 const BetContract_Json = require("../artifacts/contracts/BetContract.sol/BetContract.json");
-const BetContract_Address = "0xE8D5ca4F9FC0311a343402aF042DEb06653E85b3";
+const BetContract_Address = "0x2147d52fA508270Ac71096f8b6e240A3832E6912";
 const BetContract_Abi = BetContract_Json.abi;
 const BetContract_bytecode = BetContract_Json.bytecode;
 module.exports = {

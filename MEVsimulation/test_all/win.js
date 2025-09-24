@@ -15,7 +15,7 @@ const { transaction_receipt } = require("../../scripts/transaction_receipt.js");
 (async () => {
   try {
     // rates state
-    const amm_rate = await AMM.getRate(ethers.ZeroAddress, TestToken_Address);
+    const amm_rate = await AMM.getRate(TestToken_Address,ethers.ZeroAddress);
     const bet_rate = await BetContract.betRate();
     //state before executing claimWin
     const Bet_Walet1 = await alchemyProvider.getBalance(BetContract_Address);
@@ -30,7 +30,7 @@ const { transaction_receipt } = require("../../scripts/transaction_receipt.js");
     //state after executing claimWin
     const Bet_Walet2 = await alchemyProvider.getBalance(BetContract_Address);
     const player_wallet2 = await alchemyProvider.getBalance(player_address);
-    console.table([
+   console.table([
       {
         contract: "BetContract",
         "contrcat address": BetContract_Address,
@@ -41,7 +41,7 @@ const { transaction_receipt } = require("../../scripts/transaction_receipt.js");
     console.log("• Rates ");
     console.table([
       {
-        "AMM rate": `${ethers.formatUnits(amm_rate)}` ,
+        "AMM test price": `${ethers.formatUnits(amm_rate)}` ,
         " Bet rate": `${ethers.formatUnits(bet_rate)}`,
       },
     ]);
@@ -59,7 +59,7 @@ const { transaction_receipt } = require("../../scripts/transaction_receipt.js");
         player_wallet: `${ethers.formatUnits(player_wallet2)} ETH `,
       },
     ]);
-    await transaction_receipt(
+   await transaction_receipt(
       transaction.hash,
       "claimWin",
       BetContract_Address

@@ -107,7 +107,7 @@ contract BetContract {
      * This is where MEV vulnerability exists in unprotected version
      */
     function claimWin() external beforeDeadline onlyCurrentPlayer {
-        uint256 currentRate = IRateContract(rateContract).getRate(address(0), token);
+        uint256 currentRate = IRateContract(rateContract).getRate(token, address(0));
         
         if (currentRate > betRate) {
             // Player wins the entire pot

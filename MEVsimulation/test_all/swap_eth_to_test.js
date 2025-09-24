@@ -28,7 +28,7 @@ const {
     console.log(" • State before executing swap function");
     
     // swap 10 TEST token for ? ether
-    const amount_to_swap = ethers.parseUnits("0.001");
+    const amount_to_swap = ethers.parseUnits("0.0001");
 
     //execute swap function
     const transaction = await AMM.swapETHForTokens(0, {value:amount_to_swap});
