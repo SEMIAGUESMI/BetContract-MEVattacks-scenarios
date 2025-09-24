@@ -1,30 +1,70 @@
-//******* Step 2: Attacker manipulates AMM rate by making large swap  */
-//---- swap Ether to Token ----*/
+//******* Step 2: player claim win   */
 
-const {ethers} = require ("hardhat");
+const { ethers } = require("hardhat");
 const {
-    TestToken,
-    BetContract,
-    AMM,
-    AMM_Address,
-     alchemyProvider,
-     BetContract_Address,
-     signer
-} = require ("./beforeEach.js");
+  TestToken,
+  BetContract,
+  AMM,
+  TestToken_Address,
+  AMM_Address,
+  alchemyProvider,
+  BetContract_Address,
+  signer,
+} = require("./beforeEach.js");
+const { transaction_receipt } = require("../../scripts/transaction_receipt.js");
 (async () => {
-     try {  
-        
-        console.log("amm Balance token", ethers.formatUnits(await TestToken.balanceOf(signer.address)) )
-        console.log("amm balance ether", ethers.formatUnits(await alchemyProvider.getBalance(BetContract_Address)) )  
+  try {
+    // rates state
+    const amm_rate = await AMM.getRate(ethers.ZeroAddress, TestToken_Address);
+    const bet_rate = await BetContract.betRate();
+    //state before executing claimWin
+    const Bet_Walet1 = await alchemyProvider.getBalance(BetContract_Address);
+    const player_address = await BetContract.currentPlayer();
+    const player_wallet1 = await alchemyProvider.getBalance(player_address);
 
-        const tx = await BetContract.claimWin();
-        await tx.wait();
-        console.log(tx);
+    //execute claimWin function
+    const transaction = await BetContract.claimWin();
+    await transaction.wait();
+    console.log(transaction);
 
-        console.log("amm Balance token", ethers.formatUnits(await TestToken.balanceOf(signer.address)) )
-        console.log("amm balance ether", ethers.formatUnits(await alchemyProvider.getBalance(BetContract_Address)) )  
-
-        } catch (error) {
-          console.error("Error fetching AMM rate:", error);
-        }
+    //state after executing claimWin
+    const Bet_Walet2 = await alchemyProvider.getBalance(BetContract_Address);
+    const player_wallet2 = await alchemyProvider.getBalance(player_address);
+    console.table([
+      {
+        contract: "BetContract",
+        "contrcat address": BetContract_Address,
+        "Transaction hash ": transaction.hash,
+        function: "claimWin",
+      },
+    ]);
+    console.log("• Rates ");
+    console.table([
+      {
+        "AMM rate": `${ethers.formatUnits(amm_rate)}` ,
+        " Bet rate": `${ethers.formatUnits(bet_rate)}`,
+      },
+    ]);
+    console.log(" • state before executing claimWin ");
+    console.table([
+      {
+        Bet_Walet: `${ethers.formatUnits(Bet_Walet1)} ETH `,
+        player_wallet: `${ethers.formatUnits(player_wallet1)} ETH `,
+      },
+    ]);
+    console.log(" • state after executing claimWin ");
+    console.table([
+      {
+        Bet_Walet: `${ethers.formatUnits(Bet_Walet2)} ETH `,
+        player_wallet: `${ethers.formatUnits(player_wallet2)} ETH `,
+      },
+    ]);
+    await transaction_receipt(
+      transaction.hash,
+      "claimWin",
+      BetContract_Address
+    );
+  } catch (error) {
+    console.error(error);
+  }
 })();

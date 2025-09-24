@@ -87,7 +87,7 @@ contract MEVProtectedBetContract is ChainlinkClient, ConfirmedOwner {
         uint256 _fee,
         string memory _apiUrl
     ) payable ConfirmedOwner(msg.sender) {
-        require(msg.value > 0, "Must send initial pot amount");
+        //require(msg.value > 0, "Must send initial pot amount");
         require(_deadline > block.timestamp, "Deadline must be in the future");
         require(_rateContract != address(0), "Rate contract address cannot be zero");
         

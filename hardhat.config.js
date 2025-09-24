@@ -6,9 +6,9 @@ module.exports = {
   solidity: "0.8.27",
   networks: {
     sepolia: {
-     // url:"https://eth-sepolia.g.alchemy.com/v2/cT304C27XrPf95sj_WtOe",
-     url:`https://eth-sepolia.g.alchemy.com/v2/${process.env.API_KEY}`,
-      accounts:["ac7683e8b4c780d324770bfadef3b37e223e55169e455726c941b27ed5b59c40"],
+     url:"https://eth-sepolia.g.alchemy.com/v2/cT304C27XrPf95sj_WtOe",
+     //url:`https://eth-sepolia.g.alchemy.com/v2/${process.env.API_KEY}`,
+      accounts:["e9f47cd646e43e1c9bbce76659ad22c7ea19d5db9d1161519ecbbb617bddf372"],
       chainId: 11155111,
     }
   }

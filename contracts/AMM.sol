@@ -4,7 +4,6 @@ pragma solidity ^0.8.19;
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import "./interfaces/IRateContract.sol";
-
 /**
  * @title AMM - Automated Market Maker
  * @dev Constant Product Market Maker (CPMM) implementation
@@ -174,10 +173,8 @@ contract AMM is IRateContract, ReentrancyGuard {
         require(amountIn > 0, "Insufficient input amount");
         require(reserveIn > 0 && reserveOut > 0, "Insufficient liquidity");
         
-        // Apply 0.3% fee (997/1000)
-        uint256 amountInWithFee = amountIn * 997;
-        uint256 numerator = amountInWithFee * reserveOut;
-        uint256 denominator = (reserveIn * 1000) + amountInWithFee;
+        uint256 numerator = amountIn * reserveOut;
+        uint256 denominator = reserveIn + amountIn;
         amountOut = numerator / denominator;
     }
     
@@ -200,10 +197,10 @@ contract AMM is IRateContract, ReentrancyGuard {
         
         if (_tokenA == address(0)) {
             // ETH to Token rate
-            rate = (reserveA * 1e18) / reserveB;
+            rate = (reserveB * 1e18) / reserveA;
         } else {
             // Token to ETH rate  
-            rate = (reserveB * 1e18) / reserveA;
+            rate = (reserveA * 1e18) / reserveB;
         }
     }
     

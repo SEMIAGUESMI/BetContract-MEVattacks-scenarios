@@ -72,11 +72,12 @@ contract BetContract {
         
         // Verify rate contract supports the token pair
         require(
-            IRateContract(_rateContract).supportsExchange(address(0), _token), 
+            IRateContract(_rateContract).supportsExchange(_token,address(0)), 
             "Rate contract does not support ETH/token exchange"
+            
         );
         
-        owner = msg.sender;
+       owner = msg.sender;
         betWallet = msg.value;
         initialPot = msg.value;
         betRate = _betRate;
@@ -90,7 +91,7 @@ contract BetContract {
     /**
      * @dev Place a bet - player must match the current bet wallet amount
      */
-    function placeBet() external payable beforeDeadline noBetActive {
+    function placeBet() external payable beforeDeadline  {
         require(msg.value == betWallet, "Bet amount must equal current bet wallet");
         require(msg.sender != owner, "Owner cannot place bets");
         

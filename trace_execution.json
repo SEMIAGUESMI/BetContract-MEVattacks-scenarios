@@ -1,0 +1,80 @@
+[
+  {
+    "file1": "deploy BetContract",
+    "contractAddress": "0xE8D5ca4F9FC0311a343402aF042DEb06653E85b3",
+    "transactionHash": "0xe2a85b4b73e8b7d03cbfa9757486d57411c4e25aae7f6f151318f55fa2d093e9",
+    "function": "deploy",
+    "gas": {
+      "maxFeePerGas": {
+        "wei": "1100537",
+        "usd": 4.61062272391e-9
+      },
+      "maxPriorityFeePerGas": {
+        "wei": "1100000",
+        "usd": 4.6083730000000004e-9
+      },
+      "gasLimit": "1271010",
+      "gasUsed": "1259844",
+      "gasPrice": {
+        "wei": "1100425",
+        "usd": 4.61015350775e-9
+      }
+    },
+    "transactionFee": {
+      "wei": "1386363833700",
+      "usd": 0.005808074235817791
+    }
+  },
+  {
+    "file 2": "placeBet",
+    "contractAddress": "0xE8D5ca4F9FC0311a343402aF042DEb06653E85b3",
+    "transactionHash": "0xc143caa74c1e6ee1b75bb6fda40fee6345a040fc38f99facdcae7aa7fefec4b7",
+    "function": "placeBet",
+    "gas": {
+      "maxFeePerGas": {
+        "wei": "1000566",
+        "usd": 4.209406176149999e-9
+      },
+      "maxPriorityFeePerGas": {
+        "wei": "1000000",
+        "usd": 4.207025e-9
+      },
+      "gasLimit": "77592",
+      "gasUsed": "76705",
+      "gasPrice": {
+        "wei": "1000267",
+        "usd": 4.208148275675e-9
+      }
+    },
+    "transactionFee": {
+      "wei": "76725480235",
+      "usd": 0.00032278601348565084
+    }
+  },
+  {
+    "file 4": "claimWin",
+    "contractAddress": "0xE8D5ca4F9FC0311a343402aF042DEb06653E85b3",
+    "transactionHash": "0x9d5b9d2b14ce5c336ca59053264b020b239e801b656091519fcade57b8594162",
+    "function": "claimWin",
+    "gas": {
+      "maxFeePerGas": {
+        "wei": "1038940",
+        "usd": 4.3490392029e-9
+      },
+      "maxPriorityFeePerGas": {
+        "wei": "1000000",
+        "usd": 4.186035e-9
+      },
+      "gasLimit": "43835",
+      "gasUsed": "43458",
+      "gasPrice": {
+        "wei": "1019957",
+        "usd": 4.269575700495e-9
+      }
+    },
+    "transactionFee": {
+      "wei": "44325291306",
+      "usd": 0.00018554722079211172
+    }
+  }
+]

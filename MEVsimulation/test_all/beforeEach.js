@@ -26,7 +26,6 @@ module.exports = {
     AMM,
     BetContract,
     BetContract_Address,
-
     TestToken_Address,
     AMM_Address,
     BetContract_Abi,
