@@ -11,7 +11,6 @@ const {
 const { transaction_receipt } = require("../../scripts/transaction_receipt.js");
 (async () => {
   try {
-    /*
     // rates state
     const amm_rate = await AMM.getRate(TestToken_Address, ethers.ZeroAddress);
     const bet_rate = await ProtectedBetContract.betRate();
@@ -68,7 +67,7 @@ const { transaction_receipt } = require("../../scripts/transaction_receipt.js");
       "claimWin",
       protectedBetContract_address
     );
-*/
+
     const playerBetBlock = await ProtectedBetContract.playerBetBlock();
     const currentPlayer = await ProtectedBetContract.currentPlayer();
     const rateContract = await ProtectedBetContract.rateContract();
