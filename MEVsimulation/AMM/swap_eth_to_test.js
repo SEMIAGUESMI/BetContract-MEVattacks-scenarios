@@ -11,16 +11,16 @@ const {
   TestToken_Address,
   signer,
   AMM_signer,
-} = require("./../beforeEach.js");
+} = require("../beforeEach.js");
 (async () => {
   try {
     // state before executing swap
     const betRate = await BetContract.betRate();
-    const ether_test_rate1 = await AMM_signer.getRate(
+    const ether_test_rate1 = await AMM.getRate(
       ethers.ZeroAddress,
       TestToken_Address
     );
-    const test_ether_rate1 = await AMM_signer.getRate(
+    const test_ether_rate1 = await AMM.getRate(
       TestToken_Address,
       ethers.ZeroAddress,
     );
@@ -29,19 +29,19 @@ const {
     console.log(" • State before executing swap function");
     
     // swap 10 TEST token for ? ether
-    const amount_to_swap = ethers.parseUnits("0.001");
+    const amount_to_swap = ethers.parseUnits("0.0001");
 
     //execute swap function
-    const transaction = await AMM_signer.swapETHForTokens(0, {value:amount_to_swap});
+    const transaction = await AMM.swapETHForTokens(0, {value:amount_to_swap});
     await transaction.wait();
     console.log(transaction);
 
     // state after executing swap function
-    const ether_test_rate2 = await AMM_signer.getRate(
+    const ether_test_rate2 = await AMM.getRate(
       ethers.ZeroAddress,
       TestToken_Address,
     );
-      const test_ether_rate2 = await AMM_signer.getRate(
+      const test_ether_rate2 = await AMM.getRate(
         TestToken_Address,
         ethers.ZeroAddress, 
     );

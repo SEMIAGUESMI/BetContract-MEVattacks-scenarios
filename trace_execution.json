@@ -1,80 +1,80 @@
-[
-  {
-    "file1": "deploy BetContract",
-    "contractAddress": "0x982C994D8De22Cd2c83d26FC124E70CC3d37164c",
-  "transactionHash": "0x2c5ca3cb04c4a90506da53736b3acbfa99953768e011bf2ae0eeac100db60f0f",
-  "function": "deploy",
+[{
+  "trace 1" : "deploy ProtectedBetContract",
+  "contractAddress": "0xC365414f0a3424FDA64B0E578812e430E85233e5",
+  "transactionHash": "0xb28c27e33b6f96e065270ea43158155e6dccaf281bc12a7a8de5afe5762f8431",
+  "function": "deploy",  
   "gas": {
     "maxFeePerGas": {
-      "wei": "1000039",
-      "usd": 4.184778199985e-9
+      "wei": "1000025",
+      "usd": 4.1274781843750005e-9
     },
     "maxPriorityFeePerGas": {
       "wei": "1000000",
-      "usd": 4.184615e-9
+      "usd": 4.127375e-9
     },
-    "gasLimit": "1271022",
-    "gasUsed": "1259856",
+    "gasLimit": "3084830",
+    "gasUsed": "3059382",
     "gasPrice": {
-      "wei": "1000033",
-      "usd": 4.184753092295e-9
+      "wei": "1000020",
+      "usd": 4.1274575475e-9
     }
   },
   "transactionFee": {
-    "wei": "1259897575248",
-    "usd": 0.005272186291846409
+    "wei": "3059443187640",
+    "usd": 0.012627469326585644
   }
-  },
-  {
-    "file 2": "placeBet",
-    "contractAddress": "0x982C994D8De22Cd2c83d26FC124E70CC3d37164c",
-  "transactionHash": "0x595994d6fe6e1f535685415ef7fb405268a31d9e00382b13742b37f9b6f7f8e1",
+},
+{
+  "trace 2" : "placeBet in ProtectedBetContract",
+  "contractAddress": "0xC365414f0a3424FDA64B0E578812e430E85233e5",
+  "transactionHash": "0x40d20e1085468515e210550cf26f21f674c1cb95a1ffdeb0ba1bb6148a6fbfab",
   "function": "placeBet",
   "gas": {
     "maxFeePerGas": {
-      "wei": "1000072",
-      "usd": 4.18294615044e-9
+      "wei": "1000048",
+      "usd": 4.13713857312e-9
     },
     "maxPriorityFeePerGas": {
       "wei": "1000000",
-      "usd": 4.182645e-9
+      "usd": 4.136939999999999e-9
     },
-    "gasLimit": "77592",
-    "gasUsed": "76705",
+    "gasLimit": "99853",
+    "gasUsed": "98878",
     "gasPrice": {
-      "wei": "1000040",
-      "usd": 4.182812305800001e-9
+      "wei": "1000024",
+      "usd": 4.137039286559999e-9
     }
   },
   "transactionFee": {
-    "wei": "76708068200",
-    "usd": 0.000320842617916389
+    "wei": "98880373072",
+    "usd": 0.0004090621705764796
   }
-  },
-  {
-    "file 4": "claimWin",
-    "contractAddress": "0xE8D5ca4F9FC0311a343402aF042DEb06653E85b3",
-    "transactionHash": "0x9d5b9d2b14ce5c336ca59053264b020b239e801b656091519fcade57b8594162",
-    "function": "claimWin",
-    "gas": {
-      "maxFeePerGas": {
-        "wei": "1038940",
-        "usd": 4.3490392029e-9
-      },
-      "maxPriorityFeePerGas": {
-        "wei": "1000000",
-        "usd": 4.186035e-9
-      },
-      "gasLimit": "43835",
-      "gasUsed": "43458",
-      "gasPrice": {
-        "wei": "1019957",
-        "usd": 4.269575700495e-9
-      }
+},
+{ 
+  "url" : "https://alchemy-api.onrender.com/?from=0xecbda29a86b46e80402ef68ae0f15c9d3785fdf5&to=0x7b3fa1b861a5d1826cd50347e768b6a5950493a2&startBlock=9304496",
+  "trace 3 ": " claimWin in ProtectedBetContract",
+  "contractAddress": "0xC365414f0a3424FDA64B0E578812e430E85233e5",
+  "transactionHash": "0xc851ae38a8427b2e71c57e0b0df5cd3e2cb01e3a44e22139c868c4b560cf3a79",
+  "function": "claimWin",
+  "gas": {
+    "maxFeePerGas": {
+      "wei": "1000038",
+      "usd": 4.136182168949999e-9
     },
-    "transactionFee": {
-      "wei": "44325291306",
-      "usd": 0.00018554722079211172
+    "maxPriorityFeePerGas": {
+      "wei": "1000000",
+      "usd": 4.1360249999999995e-9
+    },
+    "gasLimit": "208295",
+    "gasUsed": "205497",
+    "gasPrice": {
+      "wei": "1000021",
+      "usd": 4.136111856525e-9
     }
+  },
+  "transactionFee": {
+    "wei": "205501315437",
+    "usd": 0.0008499585781803179
   }
-]
+
+}]

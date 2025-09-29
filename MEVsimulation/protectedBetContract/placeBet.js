@@ -1,32 +1,32 @@
 // ********** Step 1: Player places bet */
 const {
-  ProtectedBet,
-  protectedBet_address,
+  protectedBetContract_address,
+  ProtectedBetContract,
   signer,
   alchemyProvider,
 } = require("./../beforeEach.js");
-const { transaction_receipt } = require("../../../scripts/transaction_receipt.js");
+const { transaction_receipt } = require("../../scripts/transaction_receipt.js");
 
 (async () => {
   //state before executing placeBet function
-  const Bet_amount = await alchemyProvider.getBalance(protectedBet_address);
+  const Bet_amount = await alchemyProvider.getBalance(protectedBetContract_address);
   player_wallet_1 = await alchemyProvider.getBalance(signer.address);
-  betContract_wallet_1 = await alchemyProvider.getBalance(protectedBet_address);
+  protectedBetContract_wallet_1 = await alchemyProvider.getBalance(protectedBetContract_address);
 
   //execute placeBet function
-  const transaction = await ProtectedBet.placeBet({ value: Bet_amount });
+  const transaction = await ProtectedBetContract.placeBet({ value: Bet_amount });
   await transaction.wait();
   const receipt = await alchemyProvider.getTransactionReceipt(transaction.hash);
 
   //state before executing placeBet function
   player_wallet_2 = await alchemyProvider.getBalance(signer.address);
-  betContract_wallet_2 = await alchemyProvider.getBalance(protectedBet_address);
+  protectedBetContract_wallet_2 = await alchemyProvider.getBalance(protectedBetContract_address);
 
   // logs in a table
   console.table([
     {
       Contract: "ProtectedBet.sol",
-      "Contract Address": protectedBet_address,
+      "Contract Address": protectedBetContract_address,
       "Transaction Hash": transaction.hash,
       Function: "placeBet",
     },
@@ -35,7 +35,7 @@ const { transaction_receipt } = require("../../../scripts/transaction_receipt.js
   console.table([
     {
       "Player wallet": `${ethers.formatUnits(player_wallet_1)} ETH`,
-      "Bet Contract wallet": `${ethers.formatUnits(betContract_wallet_1)} ETH`,
+      "Bet Contract wallet": `${ethers.formatUnits(protectedBetContract_wallet_1)} ETH`,
     },
   ]);
   console.table([
@@ -47,7 +47,7 @@ const { transaction_receipt } = require("../../../scripts/transaction_receipt.js
   console.table([
     {
       "Player wallet": `${ethers.formatUnits(player_wallet_2)} ETH`,
-      "Bet Contract wallet": `${ethers.formatUnits(betContract_wallet_2)} ETH`,
+      "Bet Contract wallet": `${ethers.formatUnits(protectedBetContract_wallet_2)} ETH`,
     },
   ]);
 
@@ -55,14 +55,14 @@ const { transaction_receipt } = require("../../../scripts/transaction_receipt.js
   const outputJson = {
     initialState: {
       "Player wallet": `${ethers.formatUnits(player_wallet_1)} ETH`,
-      "Bet Contract wallet": `${ethers.formatUnits(betContract_wallet_1)}`,
+      "Bet Contract wallet": `${ethers.formatUnits(protectedBetContract_wallet_1)}`,
     },
     betAmount: {
       "amount to bet with": `${ethers.formatUnits(Bet_amount)} ETH`,
     },
     afterPlaceBet: {
       "Player wallet": `${ethers.formatUnits(player_wallet_2)} ETH`,
-      "Bet Contract wallet": `${ethers.formatUnits(betContract_wallet_2)}`,
+      "Bet Contract wallet": `${ethers.formatUnits(protectedBetContract_wallet_2)}`,
     },
   };
 
@@ -70,5 +70,5 @@ const { transaction_receipt } = require("../../../scripts/transaction_receipt.js
   console.log(" • Transaction : ", transaction);
 
   // show gas consumption and transaction fee
-  await transaction_receipt(transaction.hash, "placeBet", protectedBet_address );
+  await transaction_receipt(transaction.hash, "placeBet", protectedBetContract_address );
 })();

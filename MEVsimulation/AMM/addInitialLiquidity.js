@@ -7,7 +7,7 @@ const {
   AMM_Address,
   signer,
   alchemyProvider,
-} = require("./beforeEach.js");
+} = require("../beforeEach.js");
 
 (async () => {
   try {

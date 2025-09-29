@@ -17,30 +17,22 @@ const BetContract_Json = require("../artifacts/contracts/BetContract.sol/BetCont
 const BetContract_Address = "0x2147d52fA508270Ac71096f8b6e240A3832E6912";
 const BetContract_Abi = BetContract_Json.abi;
 const BetContract_bytecode = BetContract_Json.bytecode;
-//protectedBet
-const protectedBet_Json = require("../artifacts/contracts/oracle.sol/ProtectedBet.json");
-const protectedBet_address= "0x74D7F01b2b6854bb41ee3202D651ef10C3abAd5F";
-const protectedBet_abi = protectedBet_Json.abi;
-
-//testContract
-const testContract_Json = require("../artifacts/contracts/TestContract.sol/TestContract.json");
-const testContract_address= "0x898Abb10c65daDb4A45bFEB87D01af8E09147406";
-const testContract_abi = testContract_Json.abi;
-
+//ProtectedBetContract
+const protectedBetContract_Json = require("../artifacts/contracts/ProtectedBetContract.sol/ProtectedBetContract.json");
+const protectedBetContract_address= "0xC365414f0a3424FDA64B0E578812e430E85233e5";
+const protectedBetContract_abi = protectedBetContract_Json.abi;
 module.exports = {
        BetContract_Address,
        Exchange_Address,
        TestToken_Address,
        AMM_Address,
-       protectedBet_address,
+       protectedBetContract_address,
 
        BetContract_Abi,
        TestToken_Abi,
        Exchange_Abi,
        AMM_Abi,
-       protectedBet_abi,
+       protectedBetContract_abi,
 
-       BetContract_bytecode, 
-       testContract_address,
-       testContract_abi,  
+       BetContract_bytecode,  
 };

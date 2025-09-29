@@ -10,7 +10,7 @@ const {
   alchemyProvider,
   BetContract_Address,
   signer,
-} = require("./beforeEach.js");
+} = require("../beforeEach.js");
 const { transaction_receipt } = require("../../scripts/transaction_receipt.js");
 (async () => {
   try {

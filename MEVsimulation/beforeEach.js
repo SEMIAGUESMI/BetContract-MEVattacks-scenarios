@@ -7,11 +7,9 @@ const {
   TestToken_Abi,
   AMM_Abi,
   BetContract_bytecode,
-  protectedBet_abi,
-  protectedBet_address,
-  testContract_address,
-  testContract_abi,  
-} = require("../constant");
+  protectedBetContract_abi,
+  protectedBetContract_address,  
+} = require("./constant");
 
 // Provider
 const alchemyProvider = new ethers.JsonRpcProvider(process.env.API_URL);
@@ -36,25 +34,27 @@ const BetContract = new ethers.Contract(
   signer
 );
 const TestToken = new ethers.Contract(TestToken_Address, TestToken_Abi, signer);
-const ProtectedBet = new ethers.Contract(protectedBet_address, protectedBet_abi, signer);
-const TestConract = new ethers.Contract(testContract_address, testContract_abi, signer);
+const ProtectedBetContract= new ethers.Contract(protectedBetContract_address, protectedBetContract_abi, signer);
+
 module.exports = {
   TestToken,
   AMM,
   BetContract,
+  ProtectedBetContract,
+  
   BetContract_Address,
   TestToken_Address,
   AMM_Address,
+  protectedBetContract_address,
+
   BetContract_Abi,
   TestToken_Abi,
   AMM_Abi,
+
   signer,
   alchemyProvider,
-  BetContract_bytecode,
   signer2,
-  ProtectedBet,
-  protectedBet_address,
   AMM_signer,
-  TestConract,
-  testContract_address
+
+  BetContract_bytecode,
 };

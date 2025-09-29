@@ -13,7 +13,7 @@ import "./interfaces/IRateContract.sol";
  * Implementation based on MEV Noninterference paper using Chainlink oracles
  */
 
-contract TestContract is ChainlinkClient, ConfirmedOwner {
+contract ProtectedBetContract is ChainlinkClient, ConfirmedOwner {
     using Chainlink for Chainlink.Request;
 
     // State variables

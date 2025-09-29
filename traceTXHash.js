@@ -1,3 +1,0 @@
-//addInitialLiquidity tx hash : 0xf8267a7951e92b4d3cddf538328b999c2d7f29b6230ded731aa7d8f0ed75d45f
-// deploy bet contract tx hash : 0x2c5ca3cb04c4a90506da53736b3acbfa99953768e011bf2ae0eeac100db60f0f
-// placeBet tx hash : 0x595994d6fe6e1f535685415ef7fb405268a31d9e00382b13742b37f9b6f7f8e1
