@@ -132,17 +132,17 @@ contract MEVProtectedBetContract is ChainlinkClient, ConfirmedOwner {
      * This function initiates the MEV check via Chainlink oracle
      */
     function claimWin() external beforeDeadline onlyCurrentPlayer {
-        uint256 currentRate = IRateContract(rateContract).getRate(address(0), token);
+        uint256 currentRate = IRateContract(rateContract).getRate(token, address(0));
         
         if (currentRate > betRate) {
             // Check for MEV transactions via oracle before paying out
             _requestTransactionCheck(currentPlayer, betWallet);
-        } else {
+        } /*else {
             // Player loses, reset state
             currentPlayer = address(0);
             playerBet = 0;
             playerBetBlock = 0;
-        }
+        }*/
     }
     
     /**

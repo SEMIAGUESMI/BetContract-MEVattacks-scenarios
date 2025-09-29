@@ -17,7 +17,6 @@ contract BetContract {
     uint256 public deadline;
     uint256 public betWallet;
     uint256 public initialPot;
-    
     address public currentPlayer;
     uint256 public playerBet;
     
@@ -74,10 +73,9 @@ contract BetContract {
         require(
             IRateContract(_rateContract).supportsExchange(_token,address(0)), 
             "Rate contract does not support ETH/token exchange"
-            
         );
         
-       owner = msg.sender;
+        owner = msg.sender;
         betWallet = msg.value;
         initialPot = msg.value;
         betRate = _betRate;
@@ -137,32 +135,11 @@ contract BetContract {
         
         emit BetClosed(owner, amount);
     }
-    
+
     /**
-     * @dev Get current contract state
+     * @dev Receive ETH directly 
      */
-    function getState() external view returns (
-        address _owner,
-        address _currentPlayer,
-        uint256 _betWallet,
-        uint256 _betRate,
-        uint256 _deadline,
-        uint256 _currentRate,
-        bool _betActive
-    ) {
-        uint256 currentRate = 0;
-        if (rateContract != address(0)) {
-            currentRate = IRateContract(rateContract).getRate(address(0), token);
-        }
-        
-        return (
-            owner,
-            currentPlayer,
-            betWallet,
-            betRate,
-            deadline,
-            currentRate,
-            currentPlayer != address(0)
-        );
+    receive() external payable {
+        // Allow contract to receive ETH
     }
 }

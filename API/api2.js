@@ -1,3 +1,5 @@
+//Chainlink adapter - node.js API 
+
 import express from "express";
 import axios from "axios";
 import dotenv from "dotenv";

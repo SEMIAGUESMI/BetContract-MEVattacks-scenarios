@@ -1,18 +1,6 @@
 const {ethers} = require ("hardhat")
-const axios = require('axios');
-const {
-    alchemyProvider,
-} = require ("../MEVsimulation/test_all/beforeEach.js");
 const {transaction_receipt} = require("./transaction_receipt.js")
-async function getETHPriceUSD() {
-    try {
-        const response = await axios.get('https://api.coinbase.com/v2/exchange-rates?currency=ETH');
-        return Number(response.data.data.rates.USD);
-    } catch (error) {
-        console.log("⚠️ Could not fetch ETH price:", error.message);
-        return 3500; // Update fallback to realistic value
-    }
-}
+
 async function main() {
       // constructor parameters
       const TestToken_address="0xe843bC5f5034F1FF926109e4F604aa6Ab976f9f2";
@@ -21,19 +9,8 @@ async function main() {
       const initial_pot = ethers.parseEther("0.00000001");    // 0.00000001 ETH initial pot
       const deadline = Math.floor(Date.now() / 1000) + (7 * 24 * 60 * 60); // 7 days
 
-      const Bet = await ethers.getContractFactory("BetContract");
-
-       // Estimate gas before deployment
-       const deployTransaction = Bet.getDeployTransaction(
-       bet_rate,
-       TestToken_address,
-       rate_contract_address,
-       deadline,  
-    { value: initial_pot }
-     );
-       const estimatedGas = await alchemyProvider.estimateGas(deployTransaction);
-
     //Deploy contract
+    const Bet = await ethers.getContractFactory("BetContract");
     const deployTx = await Bet.deploy(bet_rate, TestToken_address, rate_contract_address, deadline, { value: initial_pot });
     const bet = await deployTx.waitForDeployment();
     const transaction = await deployTx.deploymentTransaction().wait();
