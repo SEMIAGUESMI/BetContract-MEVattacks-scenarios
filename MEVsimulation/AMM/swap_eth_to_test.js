@@ -9,27 +9,31 @@ const {
   AMM_Address,
   alchemyProvider,
   TestToken_Address,
+  ProtectedBetContract,
+  ProtectedBetContract_address,
   signer,
-  AMM_signer,
 } = require("../beforeEach.js");
 (async () => {
   try {
+    //from address
+    const from_address = signer.address;
+    const current_Bet_Playe = await ProtectedBetContract.currentPlayer();
     // state before executing swap
-    const betRate = await BetContract.betRate();
+    const betRate = await ProtectedBetContract.betRate();
     const ether_test_rate1 = await AMM.getRate(
       ethers.ZeroAddress,
       TestToken_Address
     );
     const test_ether_rate1 = await AMM.getRate(
       TestToken_Address,
-      ethers.ZeroAddress,
+      ethers.ZeroAddress
     );
     const amm_ether_Balance1 = await alchemyProvider.getBalance(AMM_Address);
     const amm_test_Balance1 = await TestToken.balanceOf(AMM_Address);
     console.log(" • State before executing swap function");
-    
+
     // swap 10 TEST token for ? ether
-    const amount_to_swap = ethers.parseUnits("0.0001");
+    const amount_to_swap = ethers.parseUnits("0.001");
 
     //execute swap function
     const transaction = await AMM.swapETHForTokens(0, {value:amount_to_swap});
@@ -39,32 +43,39 @@ const {
     // state after executing swap function
     const ether_test_rate2 = await AMM.getRate(
       ethers.ZeroAddress,
-      TestToken_Address,
+      TestToken_Address
     );
-      const test_ether_rate2 = await AMM.getRate(
-        TestToken_Address,
-        ethers.ZeroAddress, 
+    const test_ether_rate2 = await AMM.getRate(
+      TestToken_Address,
+      ethers.ZeroAddress
     );
     const amm_ether_Balance2 = await alchemyProvider.getBalance(AMM_Address);
     const amm_test_Balance2 = await TestToken.balanceOf(AMM_Address);
-
+    
     //logs in a table
     console.table([
       {
         Contract: "AMM.sol",
         "Contract Address": AMM_Address,
         "Transaction Hash": transaction.hash,
-        function: "swap",
+        function: "swap ETHER to TEST",
       },
     ]);
-
+    console.table([
+      {
+        from_address: from_address,
+        "Bet current Player address": current_Bet_Playe,
+      },
+    ]);
     console.log(" • State before executing swap function");
     console.table([
       {
         "AMM - ETHER Balance ": `${ethers.formatUnits(amm_ether_Balance1)} ETH`,
         "AMM - TEST Balance": `${ethers.formatUnits(amm_test_Balance1)} TEST`,
-        "AMM - ETHER price": `${ethers.formatUnits(ether_test_rate1)} TEST `,
-        "AMM - TEST price": `${ethers.formatUnits(test_ether_rate1)} ETH`,
+        "AMM rate - ETHER price": `${ethers.formatUnits(
+          ether_test_rate1
+        )} TEST `,
+        "AMM rate - TEST price": `${ethers.formatUnits(test_ether_rate1)} ETH`,
         "Bet Rate": `${ethers.formatUnits(betRate)}`,
       },
     ]);
@@ -78,9 +89,11 @@ const {
       {
         "AMM - ETHER Balance": `${ethers.formatUnits(amm_ether_Balance2)} ETH`,
         "AMM - TEST Balance": `${ethers.formatUnits(amm_test_Balance2)} TEST`,
-        "AMM - ETHER price": `${ethers.formatUnits(ether_test_rate2)} TEST`,
-        "AMM - TEST price ": `${ethers.formatUnits(test_ether_rate2)} ETH`,
-        "Bet Rate": `${ethers.formatUnits(betRate)}`
+        "AMM rate - ETHER price": `${ethers.formatUnits(
+          ether_test_rate2
+        )} TEST`,
+        "AMM rate - TEST price ": `${ethers.formatUnits(test_ether_rate2)} ETH`,
+        "Bet Rate": `${ethers.formatUnits(betRate)}`,
       },
     ]);
   } catch (error) {

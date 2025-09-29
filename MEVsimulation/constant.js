@@ -19,7 +19,7 @@ const BetContract_Abi = BetContract_Json.abi;
 const BetContract_bytecode = BetContract_Json.bytecode;
 //ProtectedBetContract
 const protectedBetContract_Json = require("../artifacts/contracts/ProtectedBetContract.sol/ProtectedBetContract.json");
-const protectedBetContract_address= "0xC365414f0a3424FDA64B0E578812e430E85233e5";
+const protectedBetContract_address= "0x18053baDbF7C1b8f1d4c513F59a302a03cf70660";
 const protectedBetContract_abi = protectedBetContract_Json.abi;
 module.exports = {
        BetContract_Address,

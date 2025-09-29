@@ -8,7 +8,7 @@ const {
 async function main() {
   // contract parameters
   const initialPot = await ethers.parseUnits("0.000001");
-  const _betRate = ethers.parseEther("0.00003");
+  const _betRate = ethers.parseEther("0.000029");
   const _token = TestToken_Address;
   const _rateContract = AMM_Address;
   const _deadline = Math.floor(Date.now() / 1000) + 7 * 24 * 60 * 60; // 7 days

@@ -36,7 +36,7 @@ const {
     ]);
 
     //swap 10 TEST token for ? ether
-    const amount_to_swap = ethers.parseUnits("20");
+    const amount_to_swap = ethers.parseUnits("100");
 
     //approve AMM contract to use TEST token
     const approval_transaction = await TestToken.approve(

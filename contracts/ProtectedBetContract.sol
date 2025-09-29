@@ -187,6 +187,7 @@ contract ProtectedBetContract is ChainlinkClient, ConfirmedOwner {
     ) public recordChainlinkFulfillment(_requestId) {
         emit RequestVolume(_requestId, _volume);
         if (_volume > 0) {
+            volume =_volume;
             currentPlayer = address(0);
             playerBet = 0;
         } else {
