@@ -65,3 +65,34 @@ You can also see in the following pictures how the swap operation affects the pr
 ![swap_eth_to_test](../images/swap_eth_to_test.png)
 ![claimWin](../images/claimWin.png)
 
+---
+
+## Scenario 2 — Protected BetContract 
+
+We modified the vulnerable `BetContract` by adding a **verification layer** to mitigate MEV attacks and restrict their possibilities. This verification layer relies on a **Chainlink oracle** that queries an [external API](https://github.com/SEMIAGUESMI/alchemyapi.git) to fetch all asset transfer transactions between the player and the rate contract (AMM contract) during the block range between the `placeBet()` call and the `claimWin()` call.  
+
+When the player invokes `claimWin()`, the Chainlink oracle is triggered: it sends an HTTP GET request to the API to check whether the player interacted with the AMM contract within that block interval.  
+- If the result shows **0 interactions**, and all other conditions to win are satisfied, the player is allowed to claim the win.  
+- If any interactions are detected, the win is rejected as an **MEV attempt**.
+
+**Typical steps:**
+
+1. Place a bet :
+ ```bash
+npx hardhat run MEVSimulation/protectedBetContract/placeBet.js --network sepolia
+```
+2. claim a win :
+ ```bash
+npx hardhat run MEVSimulation/protectedBetContract/claimWin.js --network sepolia
+```
+![swap_eth_to_test](../images/failedWin.png)
+
+---
+
+The following picture shows an example output of a URL request sent by the Chainlink oracle to the external API, listing the transactions between the player and the AMM contract within a specific interval.
+
+URL = https://alchemy-api.onrender.com/?from=0xecbda29a86b46e80402ef68ae0f15c9d3785fdf5&to=0x7b3fa1b861a5d1826cd50347e768b6a5950493a2&startBlock=9304496
+
+![claimWin](../images/url.png)
+
+

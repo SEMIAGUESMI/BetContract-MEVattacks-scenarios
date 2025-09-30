@@ -44,8 +44,10 @@ BetContract-MEVattacks-scenarios/
 ├── images/
 |   ├── claimWin.png
 |   ├── constantFile.png 
+|   ├── failed_Win.png 
 |   ├── gas_consumption_example.png 
-|   ├── swap_eth_to_test.png   
+|   ├── swap_eth_to_test.png 
+|   └── url.png 
 ├── scripts/
 │   ├── deploy_AMM.js              
 │   ├── deploy_BetContract.js 
@@ -161,6 +163,14 @@ The `MEVSimulation/` directory includes three subdirectories:
 - `betContract` – contains test files for the BetContract functions.  
 - `protectedBetContract/` – contains test files for the ProtectedBetContract functions.
 
+## 👨‍💻 Author & Contact
+ 
+**Email:** [semia.guesmi@unicam.it]  
+ 
+
+## 📜 License
+
+This project is licensed under the **MIT License** – you are free to use, copy, modify, and distribute this project, as long as you provide proper credit to the original author. See the [LICENSE](LICENSE) file for full details.
 
 
 
