@@ -6,7 +6,7 @@ A research implementation demonstrating formal verification methods for detectin
 
 This project implements the methodology described in the paper "Noninterference in Smart Contracts: MEV Detection and Protection", which explores how formal verification methods—particularly noninterference based on unwinding conditions—can be applied to detect and localize MEV vulnerabilities in DeFi smart contracts. As a case study, we analyze a betting service contract by first modeling it in a concurrent imperative language to illustrate how MEV attack scenarios unfold, and then implementing the vulnerable contract and its dependencies in Solidity with tests that allow users to reproduce and observe these attacks in practice. Building on the insights from this analysis, we design and implement a protection layer using chainlink oracle, extend the betting contract with this verification mechanism, and demonstrate through testing how the improved version successfully restricts MEV opportunities compared to the original vulnerable implementation.
 
-### Key Contributions
+## Key Contributions
 
 - **Formal MEV Analysis**: Applies unwinding conditions to systematically detect and explain potential MEV exploit paths in smart contracts.
 - **Bet Contract Case Study**: Demonstrates MEV vulnerabilities in a betting contract interacting with AMM and Exchange rate contracts.
@@ -79,31 +79,26 @@ cd BetContract-MEVattacks-scenarios
 #### 2. Install Dependencies
 Install all required Node.js packages:
 ```bash
-bashnpm install
-```
-This will install the following dependencies:
-• **Hardhat** and its core dependencies  
-• **OpenZeppelin contracts**  
-• **Ethereum development libraries**  
-• **Testing utilities**  
-• **Other required packages** specified in `package.json`
-
+npm install
+```   
 #### 3. Configure Environment Variables
 Create a .env file in the root directory of the project:
 ```bash
 touch .env
 ```
 Add the following environment variables to your .env file:
-# Alchemy API Key
+
+```env
+Alchemy API Key
 API_KEY=your_alchemy_api_key_here
 
-# Your Ethereum RPC URL (Alchemy Sepolia endpoint)
+Your Ethereum RPC URL (Alchemy Sepolia endpoint)
 API_URL=https://eth-sepolia.g.alchemy.com/v2/your_alchemy_api_key_here
 
-# Private key of the deployer account (from MetaMask)
+Private key of the deployer account (from MetaMask)
 DEPLOYER_PRIVATE_KEY=your_deployer_private_key_here
 
-# Private key of the player account (from MetaMask)
+Private key of the player account (from MetaMask)
 Player_PRIVATE_KEY=your_player_private_key_her
 
 ⚠️ **Security Warning:** Never commit your `.env` file to version control. Ensure that `.env` is listed in your `.gitignore` file.
