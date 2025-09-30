@@ -58,7 +58,9 @@ BetContract-MEVattacks-scenarios/
 ├── package.json
 └── trace_execution.js
 ```
-## 📋 Prerequisites
+## 🚀 Installation
+
+### 📋 Prerequisites
 
 Before you begin, ensure you have the following installed:
 
@@ -68,5 +70,40 @@ Before you begin, ensure you have the following installed:
 - **Ethereum RPC Provider (e.g., [Alchemy](https://www.alchemy.com) or [Infura](https://www.infura.io))** Provides an RPC endpoint (API key + URL) to connect your project to the Ethereum blockchain (testnet or mainnet). You’ll need to create a free account with one of these providers to obtain an API key.
 - **Testnet Faucets**: Fund your wallet with testnet ether. For example, for the Sepolia testnet, you can use this faucet: [Sepolia Faucet](https://cloud.google.com/application/web3/faucet/ethereum/sepolia).
 
+### Setup Instructions
+#### 1. Clone the Repository
+```bash
+git clone https://github.com/SEMIAGUESMI/BetContract-MEVattacks-scenarios.git
+cd BetContract-MEVattacks-scenarios 
+```
+#### 2. Install Dependencies
+Install all required Node.js packages:
+```bash
+bashnpm install
+```
+This will install the following dependencies:
+• **Hardhat** and its core dependencies  
+• **OpenZeppelin contracts**  
+• **Ethereum development libraries**  
+• **Testing utilities**  
+• **Other required packages** specified in `package.json`
 
-## 🚀 Installation
+#### 3. Configure Environment Variables
+Create a .env file in the root directory of the project:
+```bash
+touch .env
+```
+Add the following environment variables to your .env file:
+# Alchemy API Key
+API_KEY=your_alchemy_api_key_here
+
+# Your Ethereum RPC URL (Alchemy Sepolia endpoint)
+API_URL=https://eth-sepolia.g.alchemy.com/v2/your_alchemy_api_key_here
+
+# Private key of the deployer account (from MetaMask)
+DEPLOYER_PRIVATE_KEY=your_deployer_private_key_here
+
+# Private key of the player account (from MetaMask)
+Player_PRIVATE_KEY=your_player_private_key_her
+
+⚠️ **Security Warning:** Never commit your `.env` file to version control. Ensure that `.env` is listed in your `.gitignore` file.
