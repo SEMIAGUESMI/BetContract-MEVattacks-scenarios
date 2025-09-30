@@ -106,7 +106,7 @@ Ensure that `.env` is listed in your `.gitignore` file.
 ```
 ## ⚡ Usage
 
-### 1. Compile Smart Contracts**  
+### 1. Compile Smart Contracts
    Compile the Solidity smart contracts:  
    ```bash
    npx hardhat compile
@@ -114,6 +114,7 @@ Ensure that `.env` is listed in your `.gitignore` file.
 This will compile all contracts in the contracts/ directory.
 ### 2. Deploy Contracts
 Deploy the contracts to your chosen network (local or testnet):
+
 For local development (Hardhat Network):
 ```bash
 npx hardhat node
@@ -134,5 +135,13 @@ npx hardhat run scripts/deploy_AMM.js --network sepolia
 npx hardhat run scripts/deploy_Exchange.js --network sepolia
 npx hardhat run scripts/deploy_BetContract.js --network sepolia
 npx hardhat run scripts/deploy_protectedBetContract.js --network sepolia
-````
+```
+**⚠️ Note:** Deploy the contracts in the following order:  
+
+1. **TestToken.sol** – required first, as its address is needed by other contracts.  
+2. **AMM.sol** and **Exchange.sol** – both require the deployed **TestToken** address as a constructor parameter.  
+3. **BetContract.sol** and **ProtectedBetContract.sol** – both require the deployed **AMM** and **TestToken** addresses  as a constructor parameters.  
+
+After each deployment, make sure to **update the `MEVSimulation/constants.js` file** with the new contract addresses.
+
 
