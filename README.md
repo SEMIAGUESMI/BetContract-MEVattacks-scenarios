@@ -89,16 +89,16 @@ touch .env
 Add the following environment variables to your .env file:
 
 ```env
-Alchemy API Key
+#Alchemy API Key
 API_KEY=your_alchemy_api_key_here
 
-Your Ethereum RPC URL (Alchemy Sepolia endpoint)
+//Your Ethereum RPC URL (Alchemy Sepolia endpoint)
 API_URL=https://eth-sepolia.g.alchemy.com/v2/your_alchemy_api_key_here
 
-Private key of the deployer account (from MetaMask)
+//Private key of the deployer account (from MetaMask)
 DEPLOYER_PRIVATE_KEY=your_deployer_private_key_here
 
-Private key of the player account (from MetaMask)
+//Private key of the player account (from MetaMask)
 Player_PRIVATE_KEY=your_player_private_key_her
 
 ⚠️ **Security Warning:** Never commit your `.env` file to version control. Ensure that `.env` is listed in your `.gitignore` file.
