@@ -16,7 +16,7 @@ Each contract function used in the simulations has an associated script "[`scrip
 
 - **Import the deployed TestToken**  
   You need to import the deployed `TestToken` contract into your wallet (deployer account) in order to send tokens to other accounts and interact with the AMM for swaps.
-  
+
 ---
 
 ## Scenario 1 — Vulnerable BetContract
@@ -72,7 +72,7 @@ You can also see in the following pictures how the swap operation affects the pr
 
 ## Scenario 2 — Protected BetContract 
 
-We modified the vulnerable `BetContract` by adding a **verification layer** to mitigate MEV attacks and restrict their possibilities. This verification layer relies on a **Chainlink oracle** that queries an [external API](https://github.com/SEMIAGUESMI/alchemyapi.git) to fetch all asset transfer transactions between the player and the rate contract (AMM contract) during the block range between the `placeBet()` call and the `claimWin()` call.  
+We modified the vulnerable `BetContract` by adding a **verification layer** to mitigate MEV attacks and restrict their possibilities. This verification layer relies on a **Chainlink oracle** that queries an [external API](https://github.com/SEMIAGUESMI/Alchemy_API.git) to fetch all asset transfer transactions between the player and the rate contract (AMM contract) during the block range between the `placeBet()` call and the `claimWin()` call.  
 
 When the player invokes `claimWin()`, the Chainlink oracle is triggered: it sends an HTTP GET request to the API to check whether the player interacted with the AMM contract within that block interval.  
 - If the result shows **0 interactions**, and all other conditions to win are satisfied, the player is allowed to claim the win.  

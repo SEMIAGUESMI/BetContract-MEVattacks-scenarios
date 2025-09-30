@@ -55,7 +55,7 @@ BetContract-MEVattacks-scenarios/
 |   ├── deploy_Exchange.js
 |   ├── deploy_TestToken.js
 |   ├── deploy_potectedBetContract.js             
-│   └── transaction_receipt.js   # compute gas consumption            
+│   └── transaction_receipt.js               # compute gas consumption            
 ├── test/
 │   ├── AMM.js             
 │   ├── Bet.js 
