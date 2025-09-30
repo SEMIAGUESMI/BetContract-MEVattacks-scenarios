@@ -146,4 +146,15 @@ After each deployment, make sure to **update the `MEVSimulation/constants.js` fi
 
 ![MEVSimulation/constants.js](images/constantFile.png)
 
+### 3. Interact with Contracts
+
+For this section, refer to the `README.md` file in the `MEVSimulation/` directory, which contains detailed steps for simulating MEV attack scenarios involving the main functions of each contract.  
+
+The `MEVSimulation/` directory includes three subdirectories:  
+- **AMM/** – contains test files for the AMM contract functions.  
+- **betContract/** – contains test files for the BetContract functions.  
+- **protectedBetContract/** – contains test files for the ProtectedBetContract functions.
+
+
+
 
