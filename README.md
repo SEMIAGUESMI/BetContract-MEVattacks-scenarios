@@ -6,7 +6,7 @@ A research implementation demonstrating formal verification methods for detectin
 
 This project implements the methodology described in the paper "Noninterference in Smart Contracts: MEV Detection and Protection", which explores how formal verification methods—particularly noninterference based on unwinding conditions—can be applied to detect and localize MEV vulnerabilities in DeFi smart contracts. As a case study, we analyze a betting service contract by first modeling it in a concurrent imperative language to illustrate how MEV attack scenarios unfold, and then implementing the vulnerable contract and its dependencies in Solidity with tests that allow users to reproduce and observe these attacks in practice. Building on the insights from this analysis, we design and implement a protection layer using chainlink oracle, extend the betting contract with this verification mechanism, and demonstrate through testing how the improved version successfully restricts MEV opportunities compared to the original vulnerable implementation.
 
-## Key Contributions
+## 📌 Key Contributions
 
 - **Formal MEV Analysis**: Applies unwinding conditions to systematically detect and explain potential MEV exploit paths in smart contracts.
 - **Bet Contract Case Study**: Demonstrates MEV vulnerabilities in a betting contract interacting with AMM and Exchange rate contracts.
@@ -39,7 +39,9 @@ BetContract-MEVattacks-scenarios/
 │   ├── BetContract.sol         
 │   ├── Exchange.sol           
 │   ├── ProtectedBetContract               
-|   └── testToken.sol          
+|   └── testToken.sol     
+├── images/
+|   ├── constantFile.png     
 ├── scripts/
 │   ├── deploy_AMM.js              
 │   ├── deploy_BetContract.js 
@@ -112,7 +114,7 @@ Ensure that `.env` is listed in your `.gitignore` file.
    npx hardhat compile
    ```
 This will compile all contracts in the contracts/ directory.
-### 2. Deploy Contracts
+### 2. Deploy Smart Contracts
 Deploy the contracts to your chosen network (local or testnet):
 
 For local development (Hardhat Network):
@@ -146,14 +148,14 @@ After each deployment, make sure to **update the `MEVSimulation/constants.js` fi
 
 ![MEVSimulation/constants.js](images/constantFile.png)
 
-### 3. Interact with Contracts
+### 3. Interact with Smart Contracts
 
 For this section, refer to the `README.md` file in the `MEVSimulation/` directory, which contains detailed steps for simulating MEV attack scenarios involving the main functions of each contract.  
 
 The `MEVSimulation/` directory includes three subdirectories:  
-- **AMM/** – contains test files for the AMM contract functions.  
-- **betContract/** – contains test files for the BetContract functions.  
-- **protectedBetContract/** – contains test files for the ProtectedBetContract functions.
+- `AMM/` – contains test files for the AMM contract functions.  
+- `betContract` – contains test files for the BetContract functions.  
+- `protectedBetContract/` – contains test files for the ProtectedBetContract functions.
 
 
 
