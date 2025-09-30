@@ -101,4 +101,7 @@ DEPLOYER_PRIVATE_KEY=your_deployer_private_key_here
 #Private key of the player account (from MetaMask)
 Player_PRIVATE_KEY=your_player_private_key_her
 
-⚠️ **Security Warning:** Never commit your `.env` file to version control. Ensure that `.env` is listed in your `.gitignore` file.
+⚠️ **Security Warning:** Never commit your `.env` file to version control. 
+Ensure that `.env` is listed in your `.gitignore` file.
+```
+## Usage
