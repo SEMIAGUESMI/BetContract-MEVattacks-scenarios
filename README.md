@@ -104,4 +104,35 @@ Player_PRIVATE_KEY=your_player_private_key_her
 ⚠️ **Security Warning:** Never commit your `.env` file to version control. 
 Ensure that `.env` is listed in your `.gitignore` file.
 ```
-## Usage
+## ⚡ Usage
+
+### 1. Compile Smart Contracts**  
+   Compile the Solidity smart contracts:  
+   ```bash
+   npx hardhat compile
+   ```
+This will compile all contracts in the contracts/ directory.
+### 2. Deploy Contracts
+Deploy the contracts to your chosen network (local or testnet):
+For local development (Hardhat Network):
+```bash
+npx hardhat node
+```
+In a separate terminal, deploy:
+
+```bash 
+npx hardhat run scripts/deploy_TestToken.js --network localhost
+npx hardhat run scripts/deploy_AMM.js --network localhost
+npx hardhat run scripts/deploy_Exchange.js --network localhost
+npx hardhat run scripts/deploy_BetContract.js --network localhost
+npx hardhat run scripts/deploy_protectedBetContract.js --network localhost
+```
+For Sepolia testnet:
+```bash
+npx hardhat run scripts/deploy_TestToken.js --network sepolia
+npx hardhat run scripts/deploy_AMM.js --network sepolia
+npx hardhat run scripts/deploy_Exchange.js --network sepolia
+npx hardhat run scripts/deploy_BetContract.js --network sepolia
+npx hardhat run scripts/deploy_protectedBetContract.js --network sepolia
+````
+
