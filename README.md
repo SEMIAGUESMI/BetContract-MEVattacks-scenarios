@@ -42,8 +42,10 @@ BetContract-MEVattacks-scenarios/
 │   ├── ProtectedBetContract               
 |   └── testToken.sol     
 ├── images/
+|   ├── claimWin.png
 |   ├── constantFile.png 
-|   ├── gas_consumption_example.png    
+|   ├── gas_consumption_example.png 
+|   ├── swap_eth_to_test.png   
 ├── scripts/
 │   ├── deploy_AMM.js              
 │   ├── deploy_BetContract.js 

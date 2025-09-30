@@ -16,7 +16,7 @@ Each contract function used in the simulations has an associated script that rec
 
 ---
 
-### Scenario 1 — Vulnerable BetContract
+## Scenario 1 — Vulnerable BetContract
 
 **Goal:** reproduce MEV attack steps using the original vulnerable `BetContract`.
 
@@ -59,3 +59,9 @@ npx hardhat run MEVSimulation/betContract/claimWin.js --network sepolia
 ```
  
 In this scenario, the `BetContract` risks losing its entire value because a player can perform a swap on the AMM to manipulate the TEST/ETH price and then claim an unfair win. This swap is effectively a **front-running / price-manipulation attack** — the attacker changes the AMM state to profit at the contract’s expense.
+
+You can also see in the following pictures how the swap operation affects the price in the AMM contract, ultimately causing the `BetContract` to end up with **0 ETH**.
+
+![swap_eth_to_test](../images/swap_eth_to_test.png)
+![claimWin](../images/claimWin.png)
+
