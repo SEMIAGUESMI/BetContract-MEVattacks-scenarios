@@ -5,11 +5,9 @@ This directory contains all files needed to simulate and experience MEV attacks 
 - **Scenario 1 — Vulnerable BetContract:** runs the original, vulnerable `BetContract` to reproduce MEV attack behavior.  
 - **Scenario 2 — Protected ProtectedBetContract:** runs the `ProtectedBetContract` (extended with an oracle verification layer) to demonstrate mitigation of MEV opportunities.
 
-Each contract function used in the simulations has an associated script that also records gas consumption for the executed transaction. the following picture shows an example on script output after execution the transaction that invoque the calimWin function of the BetContract and this is the of gas consumption of execting this function ![gasConsumption_example.js](../images/cgas_consumption_example.png)
-
 Each contract function used in the simulations has an associated script that records gas consumption for the executed transaction. The example below shows the script output after invoking the `claimWin` function of the `BetContract` — the image demonstrates the measured gas usage, transaction fee, gas price..etc for that transaction:
 
-![Gas consumption example](../images/cgas_consumption_example.png)
+![Gas consumption example](../images/gas_consumption_example.png)
 
 ---
 
