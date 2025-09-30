@@ -144,6 +144,6 @@ npx hardhat run scripts/deploy_protectedBetContract.js --network sepolia
 
 After each deployment, make sure to **update the `MEVSimulation/constants.js` file** with the new contract addresses.
 
-![MEVSimulation/constants.js](images/constantFile.js)
+![MEVSimulation/constants.js](images/constantFile.png)
 
 
