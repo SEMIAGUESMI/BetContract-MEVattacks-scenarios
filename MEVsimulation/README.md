@@ -3,9 +3,9 @@
 This directory contains all files needed to simulate and experience MEV attacks against the betting contract. The simulations are divided into two main scenarios:
 
 - **Scenario 1 — Vulnerable BetContract:** runs the original, vulnerable `BetContract` to reproduce MEV attack behavior.  
-- **Scenario 2 — Protected ProtectedBetContract:** runs the `ProtectedBetContract` (extended with an oracle verification layer) to demonstrate mitigation of MEV opportunities.
+- **Scenario 2 — Protected BetContract:** runs the `ProtectedBetContract` (extended with an oracle verification layer) to demonstrate mitigation of MEV opportunities.
 
-Each contract function used in the simulations has an associated script that records gas consumption for the executed transaction. The example below shows the script output after invoking the `claimWin` function of the `BetContract` — the image demonstrates the measured gas usage, transaction fee, gas price..etc for that transaction:
+Each contract function used in the simulations has an associated script "[`scripts/transaction_receipt.js`](https://github.com/SEMIAGUESMI/BetContract-MEVattacks-scenarios/blob/main/scripts/transaction_receipt.js)" that records gas consumption for the executed transaction. The example below shows the script output after invoking the `claimWin` function of the `BetContract` — the image demonstrates the measured gas usage, transaction fee, gas price..etc for that transaction:
 
 ![Gas consumption example](../images/gas_consumption_example.png)
 
@@ -14,6 +14,9 @@ Each contract function used in the simulations has an associated script that rec
 ### ⚠️ Important Notes before running
 - **Deployment order matters.** Ensure contracts are deployed in the correct order and that `MEVSimulation/constants.js` is updated with the newly deployed contract addresses after each deployment.  
 
+- **Import the deployed TestToken**  
+  You need to import the deployed `TestToken` contract into your wallet (deployer account) in order to send tokens to other accounts and interact with the AMM for swaps.
+  
 ---
 
 ## Scenario 1 — Vulnerable BetContract
@@ -75,6 +78,14 @@ When the player invokes `claimWin()`, the Chainlink oracle is triggered: it send
 - If the result shows **0 interactions**, and all other conditions to win are satisfied, the player is allowed to claim the win.  
 - If any interactions are detected, the win is rejected as an **MEV attempt**.
 
+---
+
+### ⚠️ Important Notes before running
+- Before interacting with the ProtectedBetContract, make sure to fund it with Chainlink LINK tokens. The contract needs LINK to pay oracle fees when communicating with Chainlink.
+Learn how to acquire LINK here: Chainlink – [Acquire_LINK](https://docs.chain.link/resources/acquire-link)
+
+---
+
 **Typical steps:**
 
 1. Place a bet :
@@ -85,7 +96,7 @@ npx hardhat run MEVSimulation/protectedBetContract/placeBet.js --network sepolia
  ```bash
 npx hardhat run MEVSimulation/protectedBetContract/claimWin.js --network sepolia
 ```
-![swap_eth_to_test](../images/failedWin.png)
+![swap_eth_to_test](../images/failed_Win.png)
 
 ---
 

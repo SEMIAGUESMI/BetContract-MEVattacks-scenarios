@@ -31,8 +31,9 @@ BetContract-MEVattacks-scenarios/
 |   |    ├── get_protectBet_state.js 
 |   |    └── placeBet.js
 |   ├── README.md
-|   ├── beforeEach.js      
-|   └── constant.js
+|   ├── beforeEach.js      # defines and initializes contract instances.
+|   └── constant.js        # stores global variables for contract properties (addresses, ABIs, bytecode) needed 
+|                           for interactions.
 ├── contracts/
 │   ├── interfaces/
 |   |     └── IRateContract.sol   
@@ -54,7 +55,7 @@ BetContract-MEVattacks-scenarios/
 |   ├── deploy_Exchange.js
 |   ├── deploy_TestToken.js
 |   ├── deploy_potectedBetContract.js             
-│   └── transaction_receipt.js               
+│   └── transaction_receipt.js   # compute gas consumption            
 ├── test/
 │   ├── AMM.js             
 │   ├── Bet.js 
