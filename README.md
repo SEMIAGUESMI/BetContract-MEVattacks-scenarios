@@ -4,46 +4,68 @@ A research implementation demonstrating formal verification methods for detectin
 
 ## 🔬 Research Overview
 
-This project implements the methodology described in the paper "Noninterference in Smart Contracts: MEV Detection and Protection". The research explores how formal verification methods, particularly noninterference based on unwinding conditions, can be applied to analyze MEV vulnerabilities in DeFi smart contracts.
+This project implements the methodology described in the paper "Noninterference in Smart Contracts: MEV Detection and Protection", which explores how formal verification methods—particularly noninterference based on unwinding conditions—can be applied to detect and localize MEV vulnerabilities in DeFi smart contracts. As a case study, we analyze a betting service contract by first modeling it in a concurrent imperative language to illustrate how MEV attack scenarios unfold, and then implementing the vulnerable contract and its dependencies in Solidity with tests that allow users to reproduce and observe these attacks in practice. Building on the insights from this analysis, we design and implement a protection layer using chainlink oracle, extend the betting contract with this verification mechanism, and demonstrate through testing how the improved version successfully restricts MEV opportunities compared to the original vulnerable implementation.
 
 ### Key Contributions
 
-- **Formal MEV Analysis**: Uses unwinding conditions to identify potential MEV attack vectors in smart contracts
-- **Bet Contract Case Study**: Demonstrates MEV vulnerabilities in a betting contract interacting with AMM and Exchange rate contracts
-- **Oracle-based Protection**: Implements Chainlink oracles to mitigate MEV opportunities
-- **Downgrading Mechanism**: Allows controlled information flows in specific scenarios
+- **Formal MEV Analysis**: Applies unwinding conditions to systematically detect and explain potential MEV exploit paths in smart contracts.
+- **Bet Contract Case Study**: Demonstrates MEV vulnerabilities in a betting contract interacting with AMM and Exchange rate contracts.
+- **Oracle-based Protection**: Implements Chainlink oracles to mitigate MEV opportunities.
+- **Downgrading Mechanism**: Allows controlled information flows in specific scenarios.
 
-## 🏗 Architecture
-
-The project consists of three main components:
-
-1. **Bet Contract**: The main contract vulnerable to MEV attacks
-2. **Rate Contracts**: 
-   - AMM Contract (vulnerable to manipulation)
-   - Exchange Contract (owner-controlled rates)
-3. **Oracle Protection Layer**: Chainlink-based MEV mitigation system
+## 📁 Project Structure
 
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Bet Contract  │    │  Rate Contract  │    │ Oracle Network  │
-│                 │    │                 │    │                 │
-│ - Constructor   │◄──►│ - AMM           │    │ - Chainlink     │
-│ - Bet           │    │ - Exchange      │    │ - Alchemy API   │
-│ - Win           │    │ - GetRate       │    │ - MEV Detection │
-│ - Close         │    │ - Swap          │    │                 │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
+BetContract-MEVattacks-scenarios/
+├── /MEVsimulation
+│   ├── AMM/
+│   |    ├── addInitialLiquidity.js  
+|   |    ├── swap_eth_to_test.js 
+|   |    └── swap_test_to_eth.js  
+|   ├── betContract/  
+|   |     ├── claimWin.js  
+|   |     ├── get_bet_state.js 
+|   |     └── placeBet.js  
+|   ├── protectedBetContract/  
+|   |     ├── claimWin.js 
+|   |     ├── get_protectBet_state.js 
+|   |     └── placeBet.js
+|   ├── beforeEach.js      
+|   └── constant.js
+├── contracts/
+│   ├── interfaces/
+|   |     └── IRateContract.sol   
+|   ├── AMM.sol                 
+│   ├── BetContract.sol         
+│   ├── Exchange.sol           
+│   ├── ProtectedBetContract               
+|   └──testToken.sol          
+├── scripts/
+│   ├── deploy_AMM.js              
+│   ├── deploy_BetContract.js 
+|   ├── deploy_Exchange.js
+|   ├── deploy_TestToken.js
+|   ├── deploy_potectedBetContract.js             
+│   └── transaction_receipt.js               
+├── test/
+│   ├── AMM.js             
+│   ├── Bet.js 
+|   ├── Exchange.js        
+│   └── testToken.js         
+├── README.md
+├── hardhat.config.js
+├── package-lock.json
+├── package.json
+└── trace_execution.js
 ```
-
 ## 📋 Prerequisites
 
 Before you begin, ensure you have the following installed:
 
-- **Node.js** (v16.0.0 or higher)
-- **npm** or **yarn**
-- **Git**
-- **MetaMask** or another Web3 wallet
-- **Chainlink** account (for oracle functionality)
-- **Alchemy** account (for blockchain data)
+- **[Node.js](https://nodejs.org/en)** (v22.19.0 or higher)  
+- **[Hardhat](https://hardhat.org)** (v2.26.3 or higher) Development environment for compiling, testing, and deploying smart contracts.  
+- **Ethereum Wallet (e.g., [MetaMask](https://metamask.io/en-GB))** Used to manage accounts and interact with deployed contracts.  
+- **Ethereum RPC Provider (e.g., [Alchemy](https://www.alchemy.com) or [Infura](https://www.infura.io))** Provides an RPC endpoint (API key + URL) to connect your project to the Ethereum blockchain (testnet or mainnet). You’ll need to create a free account with one of these providers to obtain an API key.
 
 ### Required Accounts
 
@@ -100,41 +122,7 @@ MAINNET_URL=https://mainnet.infura.io/v3/YOUR_INFURA_KEY
 npm install -g hardhat
 ```
 
-## 📁 Project Structure
 
-```
-MEV-unprotected-version/
-├── contracts/
-│   ├── AMM.sol                 # Automated Market Maker
-│   ├── BetContract.sol         # Main betting contract
-│   ├── Exchange.sol            # Centralized exchange rate
-│   ├── TestToken               # ERC20 Token
-│   ├── Bet_protected.sol       # MEV protection oracle
-│   │   
-│   └── interfaces/
-│       └── IRateContract.sol   # rate contract interface
-├── scripts/
-│   ├── deploy_AMM.js              
-│   ├── deploy_BetContract.js 
-|   ├── deploy_Exchange.js
-|   ├──deploy_MEVPotectedBetContract.js              
-│   └── deploy_TestToken.js                 
-├── test/
-│   ├── AMM.js             
-│   ├── Bet.js 
-|   ├── Exchange.js        
-│   └── testToken.js         
-├── oracle-service/             
-│   ├── index.js
-│   └── alchemy-adapter.js
-├── /MEV simulation
-│   ├── Bet_Exchange/
-│   |    ├── Bet_Exchange.js              
-|   └── constant.js   
-├── hardhat.config.js
-├── package.json
-└── README.md
-```
 📊 Contract Details
 BetContract.sol
 A betting contract where users bet on token exchange rates:
