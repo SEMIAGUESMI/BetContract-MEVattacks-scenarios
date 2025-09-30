@@ -1,10 +1,12 @@
 const {ethers} = require ("hardhat")
-
+const {
+  TestToken_Address,
+} = require("../MEVsimulation/constant.js");
 async  function main (){
     const deployer =await ethers.getSigners();
 
     // constructor parameters
-    const TestToken_address="0xe843bC5f5034F1FF926109e4F604aa6Ab976f9f2";
+    const TestToken_address=TestToken_Address;
     const AMM = await ethers.getContractFactory("AMM");
    const deployTx = await AMM.deploy(TestToken_address);
     const amm = await deployTx.waitForDeployment();

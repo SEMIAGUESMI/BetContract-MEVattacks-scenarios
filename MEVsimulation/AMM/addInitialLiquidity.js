@@ -5,7 +5,7 @@ const {
   AMM,
   TestToken_Address,
   AMM_Address,
-  signer,
+  deployer,
   alchemyProvider,
 } = require("../beforeEach.js");
 
@@ -33,7 +33,7 @@ const {
     console.log(" ============Approval Transaction Completed===============");
 
     const currentAllowance = await TestToken.allowance(
-      signer.address,
+      deployer.address,
       AMM_Address
     );
     console.log(

@@ -11,15 +11,15 @@ const {
   TestToken_Address,
   ProtectedBetContract,
   ProtectedBetContract_address,
-  signer,
+  player
 } = require("../beforeEach.js");
 (async () => {
   try {
     //from address
-    const from_address = signer.address;
-    const current_Bet_Playe = await ProtectedBetContract.currentPlayer();
+    const from_address = player.address;
+    const current_Bet_Playe = await BetContract.currentPlayer();
     // state before executing swap
-    const betRate = await ProtectedBetContract.betRate();
+    const betRate = await BetContract.betRate();
     const ether_test_rate1 = await AMM.getRate(
       ethers.ZeroAddress,
       TestToken_Address

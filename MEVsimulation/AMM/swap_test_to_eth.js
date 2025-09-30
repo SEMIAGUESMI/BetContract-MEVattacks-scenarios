@@ -8,7 +8,7 @@ const {
   AMM_Address,
   alchemyProvider,
   TestToken_Address,
-  signer,
+  player,
 } = require("../beforeEach.js");
 (async () => {
   try {
@@ -48,7 +48,7 @@ const {
 
     //check allowance
     const amountAllowance = await TestToken.allowance(
-      signer.address,
+      player.address,
       AMM_Address
     );
     console.log(

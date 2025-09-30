@@ -2,14 +2,12 @@
 
 const { ethers } = require("hardhat");
 const {
-  TestToken,
   BetContract,
   AMM,
   TestToken_Address,
-  AMM_Address,
   alchemyProvider,
   BetContract_Address,
-  signer,
+  player,
 } = require("../beforeEach.js");
 const { transaction_receipt } = require("../../scripts/transaction_receipt.js");
 (async () => {
@@ -21,6 +19,14 @@ const { transaction_receipt } = require("../../scripts/transaction_receipt.js");
     const Bet_Walet1 = await alchemyProvider.getBalance(BetContract_Address);
     const player_address = await BetContract.currentPlayer();
     const player_wallet1 = await alchemyProvider.getBalance(player_address);
+
+    console.log("• Rates ");
+    console.table([
+      {
+        "AMM test price": `${ethers.formatUnits(amm_rate)}` ,
+        " Bet rate": `${ethers.formatUnits(bet_rate)}`,
+      },
+    ]);
 
     //execute claimWin function
     const transaction = await BetContract.claimWin();
@@ -63,7 +69,7 @@ const { transaction_receipt } = require("../../scripts/transaction_receipt.js");
       transaction.hash,
       "claimWin",
       BetContract_Address
-    );
+    );  
   } catch (error) {
     console.error(error);
   }

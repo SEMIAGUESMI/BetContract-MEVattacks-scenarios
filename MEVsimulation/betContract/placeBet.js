@@ -1,16 +1,15 @@
 // ********** Step 1: Player places bet */
 const {
   BetContract_Address,
-  signer,
   alchemyProvider,
   BetContract,
+  player,
 } = require("../beforeEach.js");
 const { transaction_receipt } = require("../../scripts/transaction_receipt.js");
 
 (async () => {
   //state before executing placeBet function
 
-  const player = signer;
   const Bet_amount = await alchemyProvider.getBalance(BetContract_Address);
   player_wallet_1 = await alchemyProvider.getBalance(player.address);
   betContract_wallet_1 = await alchemyProvider.getBalance(BetContract_Address);

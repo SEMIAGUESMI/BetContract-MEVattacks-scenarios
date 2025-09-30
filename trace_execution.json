@@ -181,4 +181,108 @@
     "wei": "205650300762",
     "usd": 0.0008421369533688862
   }
+},
+{
+  "trace 8": "deploy bet contract ",
+  "contractAddress": "0xAfaC164597167fFCFAA4301d85B35Ee5ed73793f",
+  "transactionHash": "0x8746b3d6971c19b3baecb97efe208ebd6e7ff8d5c844097ef78fd0587917a5e0",
+  "function": "deploy",
+  "gas": {
+    "maxFeePerGas": {
+      "wei": "1002006",
+      "usd": 4.17816962883e-9
+    },
+    "maxPriorityFeePerGas": {
+      "wei": "1000000",
+      "usd": 4.169805e-9
+    },
+    "gasLimit": "1121744",
+    "gasUsed": "1111753",
+    "gasPrice": {
+      "wei": "1001585",
+      "usd": 4.176414140925e-9
+    }
+  },
+  "transactionFee": {
+    "wei": "1113515128505",
+    "usd": 0.004643140950415792
+  }
+},
+{
+  "trace 8": "place bet in original bet cintract",
+  "contractAddress": "0xAfaC164597167fFCFAA4301d85B35Ee5ed73793f",
+  "transactionHash": "0xf39cb9e11963bfde7fd88b48c5cde326aef91efe778a0f9c4feb6b34093150c7",
+  "function": "placeBet",
+  "gas": {
+    "maxFeePerGas": {
+      "wei": "1003944",
+      "usd": 4.19859922212e-9
+    },
+    "maxPriorityFeePerGas": {
+      "wei": "1000000",
+      "usd": 4.182104999999999e-9
+    },
+    "gasLimit": "77614",
+    "gasUsed": "76727",
+    "gasPrice": {
+      "wei": "1001866",
+      "usd": 4.189908807929999e-9
+    }
+  },
+  "transactionFee": {
+    "wei": "76870172582",
+    "usd": 0.0003214791331060451
+  }
+
+},
+{
+  "trace 9": "win failed AMM rate less that bet rate",
+  "contractAddress": "0xAfaC164597167fFCFAA4301d85B35Ee5ed73793f",
+  "transactionHash": "0x691d40cd1c8657e82157da520c2b988494441cda89b3e95f5841a043886f9c50",
+  "function": "claimWin",
+  "gas": {
+    "maxFeePerGas": {
+      "wei": "1005720",
+      "usd": 4.2055288092e-9
+    },
+    "maxPriorityFeePerGas": {
+      "wei": "1000000",
+      "usd": 4.1816099999999996e-9
+    },
+    "gasLimit": "43846",
+    "gasUsed": "43469",
+    "gasPrice": {
+      "wei": "1002715",
+      "usd": 4.19296307115e-9
+    }
+  },
+  "transactionFee": {
+    "wei": "43587018335",
+    "usd": 0.00018226391173981933
+  }
+}, {
+  "trace win " : "win the bet by mev",
+  "contractAddress": "0xAfaC164597167fFCFAA4301d85B35Ee5ed73793f",
+  "transactionHash": "0xf11e354ca464de511103b7f8493f93adee9d5f30101c4c18a91033fc6d50f3ff",
+  "function": "claimWin",
+  "gas": {
+    "maxFeePerGas": {
+      "wei": "1031396",
+      "usd": 4.33278629942e-9
+    },
+    "maxPriorityFeePerGas": {
+      "wei": "1000000",
+      "usd": 4.200895e-9
+    },
+    "gasLimit": "66061",
+    "gasUsed": "52205",
+    "gasPrice": {
+      "wei": "1016341",
+      "usd": 4.269541825195001e-9
+    }
+  },
+  "transactionFee": {
+    "wei": "53058081905",
+    "usd": 0.00022289143098430498
+  }
 }]

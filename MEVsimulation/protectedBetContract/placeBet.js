@@ -2,7 +2,7 @@
 const {
   protectedBetContract_address,
   ProtectedBetContract,
-  signer,
+  player,
   alchemyProvider,
 } = require("./../beforeEach.js");
 const { transaction_receipt } = require("../../scripts/transaction_receipt.js");
@@ -10,7 +10,7 @@ const { transaction_receipt } = require("../../scripts/transaction_receipt.js");
 (async () => {
   //state before executing placeBet function
   const Bet_amount = await alchemyProvider.getBalance(protectedBetContract_address);
-  player_wallet_1 = await alchemyProvider.getBalance(signer.address);
+  player_wallet_1 = await alchemyProvider.getBalance(player.address);
   protectedBetContract_wallet_1 = await alchemyProvider.getBalance(protectedBetContract_address);
 
   //execute placeBet function
@@ -19,7 +19,7 @@ const { transaction_receipt } = require("../../scripts/transaction_receipt.js");
   const receipt = await alchemyProvider.getTransactionReceipt(transaction.hash);
 
   //state before executing placeBet function
-  player_wallet_2 = await alchemyProvider.getBalance(signer.address);
+  player_wallet_2 = await alchemyProvider.getBalance(player.address);
   protectedBetContract_wallet_2 = await alchemyProvider.getBalance(protectedBetContract_address);
 
   // logs in a table
