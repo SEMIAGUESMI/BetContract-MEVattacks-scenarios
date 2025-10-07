@@ -31,10 +31,10 @@ const AMM = new ethers.Contract(AMM_Address, AMM_Abi, player);
 const BetContract = new ethers.Contract(
   BetContract_Address,
   BetContract_Abi,
-  player
+  deployer
 );
-const TestToken = new ethers.Contract(TestToken_Address, TestToken_Abi, deployer);
-const ProtectedBetContract= new ethers.Contract(protectedBetContract_address, protectedBetContract_abi, player);
+const TestToken = new ethers.Contract(TestToken_Address, TestToken_Abi, player);
+const ProtectedBetContract= new ethers.Contract(protectedBetContract_address, protectedBetContract_abi, deployer);
 
 module.exports = {
   TestToken,

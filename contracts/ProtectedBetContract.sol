@@ -144,12 +144,9 @@ contract ProtectedBetContract is ChainlinkClient, ConfirmedOwner {
             token,
             address(0)
         );
-
-        if (currentRate > betRate) {
-            requestVolumeData();
-        }
+        require(currentRate > betRate, " AMM rate still less that Bet rate");
+        requestVolumeData();
     }
-
     function requestVolumeData() public returns (bytes32 requestId) {
         Chainlink.Request memory req = buildChainlinkRequest(
             jobId,
@@ -171,7 +168,6 @@ contract ProtectedBetContract is ChainlinkClient, ConfirmedOwner {
                 startBlock_
             )
         );
-
         req.add("get", urlreq);
         req.add("path", "result");
         req.addInt("times", 1);
@@ -187,7 +183,7 @@ contract ProtectedBetContract is ChainlinkClient, ConfirmedOwner {
     ) public recordChainlinkFulfillment(_requestId) {
         emit RequestVolume(_requestId, _volume);
         if (_volume > 0) {
-            volume =_volume;
+            volume = _volume;
             currentPlayer = address(0);
             playerBet = 0;
         } else {
@@ -217,7 +213,7 @@ contract ProtectedBetContract is ChainlinkClient, ConfirmedOwner {
 
         emit BetClosed(owner(), amount);
     }
-    
+
     /**
      * @dev uintToString converte from uint to string
      */
@@ -242,12 +238,5 @@ contract ProtectedBetContract is ChainlinkClient, ConfirmedOwner {
      */
     function adrToString(address _addr) internal pure returns (string memory) {
         return Strings.toHexString(uint256(uint160(_addr)), 20);
-    }
-
-    /**
-     * @dev Receive ETH directly 
-     */
-    receive() external payable {
-        // Allow contract to receive ETH
     }
 }

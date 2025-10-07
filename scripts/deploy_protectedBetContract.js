@@ -11,7 +11,8 @@ async function main() {
   const _betRate = ethers.parseEther("0.00002");
   const _token = TestToken_Address;
   const _rateContract = AMM_Address;
-  const _deadline = Math.floor(Date.now() / 1000) + 7 * 24 * 60 * 60; // 7 days
+  const _deadline1 = Math.floor(Date.now() / 1000) + 7 * 24 * 60 * 60; // 7 days
+   const _deadline2 = Math.floor(Date.now() / 1000)+60 ; // to test the close function
 
   // deploy contract
   const ProtectedBetContract = await ethers.getContractFactory(
@@ -21,7 +22,7 @@ async function main() {
     _betRate,
     _token,
     _rateContract,
-    _deadline,
+    _deadline2,
     { value: initialPot }
   );
   //const testContract= await deployTx.waitForDeployment();

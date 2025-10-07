@@ -1,0 +1,94 @@
+[
+    {
+        "trace 1": "constructor() - PprotectedBetContract.sol ",
+        "contractAddress": "0x17C96be2EfC274E9B5026C5082DD71c8cf39A365",
+        "transactionHash": "0x41fee02d293a8d75c88c37f425f0bc12764ac808cf1098755c836ddf3ff783fe",
+        "function": "deploy",
+        "gas": {
+            "maxFeePerGas": "1000039",
+            "maxPriorityFeePerGas": "1000000",
+            "gasLimit": "3127525",
+            "gasUsed": "3101741",
+            "gasPrice": "1000031"
+        },
+        "transactionFee": {
+            "wei": "3101837153971",
+            "usd": "0.014014100261640976"
+        },
+        "fixed_gas_price": {
+            "gas_used": "3101741",
+            "gas_price_wei": "1000079",
+            "gas_price_Wei_to_USD": "0.000000000000004518",
+            "Totale_gas_used_fee": "0.0140"
+        }
+    },
+    {
+        "trace 2": "placeBet() - PprotectedBetContract.sol ",
+        "contractAddress": "0x17C96be2EfC274E9B5026C5082DD71c8cf39A365",
+        "transactionHash": "0xdcfff14378e801676f671d45171e0b3c0766d0b88236d6135226b037d42c5092",
+        "function": "placeBet",
+        "gas": {
+            "maxFeePerGas": "1000084",
+            "maxPriorityFeePerGas": "1000000",
+            "gasLimit": "99853",
+            "gasUsed": "98878",
+            "gasPrice": "1000039"
+        },
+        "transactionFee": {
+            "wei": "98881856242",
+            "usd": "0.000446748226501356"
+        },
+        "fixed_gas_price": {
+            "gas_used": "98878",
+            "gas_price_wei": "1000079",
+            "gas_price_Wei_to_USD": "0.000000000000004518",
+            "Totale_gas_used_fee": "0.0004"
+        }
+    },
+    {
+        "trace 3": "claimWin() - PprotectedBetContract.sol ",
+        "contractAddress": "0x17C96be2EfC274E9B5026C5082DD71c8cf39A365",
+        "transactionHash": "0x47e2c7e401dae6eafc8c99ff86854812280d33244f36ba011e32ece76251e8df",
+        "function": "claimWin",
+        "gas": {
+            "maxFeePerGas": "1000086",
+            "maxPriorityFeePerGas": "1000000",
+            "gasLimit": "208292",
+            "gasUsed": "205494",
+            "gasPrice": "1000044"
+        },
+        "transactionFee": {
+            "wei": "205503041736",
+            "usd": "0.000928462742563248"
+        },
+        "fixed_gas_price": {
+            "gas_used": "205494",
+            "gas_price_wei": "1000079",
+            "gas_price_Wei_to_USD": "0.000000000000004518",
+            "Totale_gas_used_fee": "0.0009"
+        }
+    },
+    {
+        "trace 2": "close() - PprotectedBetContract.sol ",
+        "contractAddress": "0xC18cd80BB2e09a52642B5eDaE31829AF16e6c483",
+        "transactionHash": "0x024346bd842fce691cdd66279d541884429a72361572d9ab882a35baf874b5d7",
+        "function": "closeBet",
+        "gas": {
+            "maxFeePerGas": "1000254",
+            "maxPriorityFeePerGas": "1000000",
+            "gasLimit": "44718",
+            "gasUsed": "39331",
+            "gasPrice": "1000130"
+        },
+        "transactionFee": {
+            "wei": "39336113030",
+            "usd": "0.000177720558669540"
+        },
+        "fixed_gas_price": {
+            "gas_used": "39331",
+            "gas_price_wei": "1000079",
+            "gas_price_Wei_to_USD": "0.000000000000004518",
+            "Totale_gas_used_fee": "0.0002"
+        }
+    }
+]

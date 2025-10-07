@@ -13,12 +13,12 @@ const AMM_Address = "0x49c8b763C1EDD2121932F0900dd904BDA1CE0083"; //put here the
 const AMM_Abi = AMM_Json.abi;
 //BetContract with AMM
 const BetContract_Json = require("../artifacts/contracts/BetContract.sol/BetContract.json");
-const BetContract_Address = "0x73b8Fc308fe0e5B71a661f823b020e49ffeE5D05"; //put here the new deployed address 
+const BetContract_Address = "0x89d255E4318401b3A1fb993aBe15e11E7Cc64F44";//"0x02CaCBA3C1066370854496Eb71F05F442B6f75B4"; //put here the new deployed address 
 const BetContract_Abi = BetContract_Json.abi;
 const BetContract_bytecode = BetContract_Json.bytecode;
 //ProtectedBetContract
 const protectedBetContract_Json = require("../artifacts/contracts/ProtectedBetContract.sol/ProtectedBetContract.json");
-const protectedBetContract_address= "0x71E125aFB71aA76309a43A8f454383a5Df51E3eF"; //put here the new deployed address 
+const protectedBetContract_address= "0xC18cd80BB2e09a52642B5eDaE31829AF16e6c483"; //"0x17C96be2EfC274E9B5026C5082DD71c8cf39A365"; //put here the new deployed address 
 const protectedBetContract_abi = protectedBetContract_Json.abi;
 module.exports = {
        BetContract_Address,

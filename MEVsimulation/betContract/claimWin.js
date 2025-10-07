@@ -70,7 +70,7 @@ const { transaction_receipt } = require("../../scripts/transaction_receipt.js");
       "claimWin",
       BetContract_Address
     );  
-  } catch (error) {
+    } catch (error) {
     console.error(error);
   }
 })();

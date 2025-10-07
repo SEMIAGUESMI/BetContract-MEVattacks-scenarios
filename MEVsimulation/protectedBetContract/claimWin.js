@@ -19,8 +19,7 @@ const { transaction_receipt } = require("../../scripts/transaction_receipt.js");
       protectedBetContract_address
     );
     const player_address = await ProtectedBetContract.currentPlayer();
-    console.log("player_address", player_address);
-    const player_wallet1 = await alchemyProvider.getBalance(player_address);
+     const player_wallet1 = await alchemyProvider.getBalance(player_address);
 
     //execute claimWin function
     const transaction = await ProtectedBetContract.claimWin();

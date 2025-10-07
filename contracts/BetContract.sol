@@ -106,8 +106,7 @@ contract BetContract {
      */
     function claimWin() external beforeDeadline onlyCurrentPlayer {
         uint256 currentRate = IRateContract(rateContract).getRate(token, address(0));
-        
-        if (currentRate > betRate) {
+        require(currentRate > betRate, " AMM rate still less that Bet rate");
             // Player wins the entire pot
             uint256 winAmount = betWallet;
             betWallet = 0;
@@ -119,7 +118,7 @@ contract BetContract {
             
             emit BetWon(msg.sender, winAmount);
         } 
-    }
+    
     
     /**
      * @dev Close bet after deadline - owner can claim remaining funds
@@ -136,10 +135,4 @@ contract BetContract {
         emit BetClosed(owner, amount);
     }
 
-    /**
-     * @dev Receive ETH directly 
-     */
-    receive() external payable {
-        // Allow contract to receive ETH
-    }
 }
